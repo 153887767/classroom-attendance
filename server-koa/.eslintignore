@@ -1,0 +1,4 @@
+# .eslintignore 在编辑器工作区的根目录下才会生效
+node_modules
+dist
+bin

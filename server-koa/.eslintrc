@@ -1,0 +1,30 @@
+{
+  "parser": "@typescript-eslint/parser", // 解析器
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020, // 指定js版本
+    "sourceType": "module" // 默认为script，使用es6 module设置为module
+  },
+  "extends": [
+    // 集成的代码规范
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended", // 使用@typescript-eslint/eslint-plugin的推荐规则
+    "plugin:prettier/recommended" // 集成prettier
+  ],
+  "plugins": ["@typescript-eslint"], // 插件
+  "rules": {
+    // 单独配置规则，会覆盖extends的规则
+    "indent": ["error", 2],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "semi": ["error", "never"]
+  }
+}
