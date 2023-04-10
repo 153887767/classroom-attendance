@@ -5,6 +5,7 @@ import json from 'koa-json'
 import logger from 'koa-logger'
 
 import index from './routes/index'
+import teacherRouter from './routes/teacher'
 
 const app = new Koa()
 
@@ -31,6 +32,8 @@ app.use(async (ctx: Koa.Context, next: Koa.Next) => {
 // routes
 app.use(index.routes())
 app.use(index.allowedMethods())
+app.use(teacherRouter.routes())
+app.use(teacherRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
