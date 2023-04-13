@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Form, Input, Button, Message } from '@arco-design/web-react'
 import { IconUser, IconLock } from '@arco-design/web-react/icon'
-import { requiredValidator } from '../../utils/requiredValidator'
-import { login, register } from '../../api/teacher'
+import { requiredValidator } from '@/utils/requiredValidator'
+import { login, register } from '@/api/teacher'
 
 const { Item: FormItem } = Form
 const { Password } = Input
