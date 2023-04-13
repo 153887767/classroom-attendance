@@ -22,7 +22,11 @@ app.use(
     // maxAge指定本次预请求的有效期，单位为秒 (Access-Control-Max-Age)
     // 由于跨域，如果不设置maxAge, 前端每次都会发两个请求，其中一个是预请求，请求类型是options
     // 设置了maxAge, 只有过期了才需要重新发送预请求
-    maxAge: 3600
+    maxAge: 3600,
+    // Access-Control-Expose-Headers, 自定义响应头
+    // 允许服务器指示那些响应头可以暴露给浏览器中运行的脚本，以响应跨源请求
+    // 没配置的话，前端axios response.headers 里没有 Authorization
+    exposeHeaders: ['Authorization']
   })
 )
 app.use(
