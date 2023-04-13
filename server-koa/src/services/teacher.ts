@@ -2,19 +2,23 @@ import { Teacher } from '../db/model'
 import { TeacherInfo } from '../typings/interfaces/teacher'
 
 /**
- * 查询教师id, 不存在则返回null
+ * 查询教师信息(id和userName), 不存在则返回null
  */
-const getTeacherId = async (userName: string) => {
+const getTeacherInfo = async (userName: string, password?: string) => {
+  const whereOpt = {
+    userName
+  }
+  if (password) {
+    Object.assign(whereOpt, { password })
+  }
   const result = await Teacher.findOne({
-    attributes: ['id'],
-    where: {
-      userName
-    }
+    attributes: ['id', 'userName'],
+    where: whereOpt
   })
   if (result === null) {
     return null
   }
-  return result.dataValues.id
+  return result.dataValues
 }
 
 /**
@@ -28,4 +32,4 @@ const createTeacher = async ({ userName, password }: TeacherInfo) => {
   return result.dataValues
 }
 
-export { getTeacherId, createTeacher }
+export { getTeacherInfo, createTeacher }

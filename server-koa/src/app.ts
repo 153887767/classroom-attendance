@@ -6,6 +6,7 @@ import logger from 'koa-logger'
 
 import index from './routes/index'
 import teacherRouter from './routes/teacher'
+import { jwtVerify } from './middlewares/jwtVerify'
 
 const app = new Koa()
 
@@ -28,6 +29,8 @@ app.use(async (ctx: Koa.Context, next: Koa.Next) => {
   const ms = (new Date() as any) - (start as any)
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
+app.use(jwtVerify([/^\/api\/teacher\/login$/, /^\/api\/teacher\/register$/]))
 
 // routes
 app.use(index.routes())

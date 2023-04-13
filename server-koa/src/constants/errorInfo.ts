@@ -17,6 +17,11 @@ const errorInfo = {
   loginFailInfo: {
     errno: 10003,
     message: '登录失败，用户名或密码错误'
+  },
+  // token过期
+  tokenFailInfo: {
+    errno: 10004,
+    message: 'token无效'
   }
 }
 
