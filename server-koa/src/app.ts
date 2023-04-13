@@ -3,6 +3,7 @@ import onerror from 'koa-onerror'
 import bodyparser from 'koa-bodyparser'
 import json from 'koa-json'
 import logger from 'koa-logger'
+import cors from 'koa2-cors'
 
 import index from './routes/index'
 import teacherRouter from './routes/teacher'
@@ -13,6 +14,7 @@ const app = new Koa()
 onerror(app)
 
 // middlewares
+app.use(cors())
 app.use(
   bodyparser({
     enableTypes: ['json', 'form', 'text']
