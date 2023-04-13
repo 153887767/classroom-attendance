@@ -12,7 +12,7 @@ export const get = <T>(
   return new Promise((resolve) => {
     instance
       .get(url, config)
-      .then((res) => resolve(res?.data || res))
+      .then((res) => resolve(res.data))
       .catch((err: Error | AxiosError) => {
         console.log('请求错误', err)
         resolve(undefined)
@@ -28,7 +28,7 @@ export const post = <T>(
   return new Promise((resolve) => {
     instance
       .post(url, data, config)
-      .then((res) => resolve(res?.data || res))
+      .then((res) => resolve(res.data))
       .catch((err: Error | AxiosError) => {
         console.log('请求错误', err)
         resolve(undefined)
