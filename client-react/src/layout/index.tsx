@@ -4,7 +4,7 @@ import Menu from './menu'
 
 const Layout: React.FC = () => {
   return (
-    <div>
+    <div className='bg-slate-100'>
       <Header />
       <Menu />
     </div>
