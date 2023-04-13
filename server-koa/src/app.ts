@@ -14,7 +14,17 @@ const app = new Koa()
 onerror(app)
 
 // middlewares
-app.use(cors())
+app.use(
+  cors({
+    origin: function (ctx) {
+      return 'http://localhost:3000'
+    },
+    // maxAge指定本次预请求的有效期，单位为秒 (Access-Control-Max-Age)
+    // 由于跨域，如果不设置maxAge, 前端每次都会发两个请求，其中一个是预请求，请求类型是options
+    // 设置了maxAge, 只有过期了才需要重新发送预请求
+    maxAge: 3600
+  })
+)
 app.use(
   bodyparser({
     enableTypes: ['json', 'form', 'text']
