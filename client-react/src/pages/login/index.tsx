@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { Form, Input, Button } from '@arco-design/web-react'
+import { useNavigate } from 'react-router-dom'
+import { Form, Input, Button, Message } from '@arco-design/web-react'
 import { IconUser, IconLock } from '@arco-design/web-react/icon'
 import { requiredValidator } from '../../utils/requiredValidator'
+import { login, register } from '../../api/teacher'
 
 const { Item: FormItem } = Form
 const { Password } = Input
@@ -18,29 +20,46 @@ const formItemLayout = {
 const Login: React.FC = () => {
   const [form] = Form.useForm()
   const [isLogin, setIsLogin] = useState(true)
+  const navigate = useNavigate()
 
   const handleSwitch = () => {
     form.resetFields()
     setIsLogin(!isLogin)
   }
 
+  const handleSubmit = async (val: any) => {
+    if (isLogin) {
+      // 登录
+      const res = await login(val)
+      if (res && !('errno' in res)) {
+        Message.success('登录成功')
+        navigate('/')
+      } else {
+        Message.warning(res?.message || '登录失败')
+      }
+    } else {
+      // 注册
+      const res = await register(val)
+      if (res && !('errno' in res)) {
+        Message.success('注册成功')
+        handleSwitch()
+      } else {
+        Message.warning(res?.message || '注册失败')
+      }
+    }
+  }
+
   return (
     <>
       <div className='w-[400px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[6px] p-5 shadow bg-white'>
         <h1 className='text-2xl text-center mb-5'>课堂考勤</h1>
-        <Form
-          form={form}
-          onSubmit={(v) => {
-            console.log(v)
-          }}
-          {...formItemLayout}
-        >
+        <Form form={form} onSubmit={handleSubmit} {...formItemLayout}>
           <FormItem
             label='用户名'
-            field='username'
+            field='userName'
             rules={[
               {
-                validator: requiredValidator('请输入用户名')
+                validator: requiredValidator('请输入用户名', true)
               }
             ]}
           >
@@ -51,7 +70,7 @@ const Login: React.FC = () => {
             field='password'
             rules={[
               {
-                validator: requiredValidator('请输入密码')
+                validator: requiredValidator('请输入密码', true)
               }
             ]}
           >

@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Outlet, NavLink, useNavigation } from 'react-router-dom'
+import { get } from '../../service'
 
 const Root: React.FC = () => {
   const navigation = useNavigation()
+
+  useEffect(() => {
+    get('/')
+  }, [])
 
   return (
     <div>
