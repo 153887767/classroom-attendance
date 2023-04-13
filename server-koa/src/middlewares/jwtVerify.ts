@@ -28,7 +28,7 @@ const jwtVerify = (unlessPath: RegExp[]) => {
     const newToken = JWT.generate(
       {
         _id: payload._id,
-        username: payload.username
+        userName: payload.userName
       },
       '1h'
     )
