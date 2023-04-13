@@ -4,7 +4,7 @@
 
 interface IModel {
   errno: number
-  data: Record<string, any>
+  data?: Record<string, any>
   message?: string
 }
 
@@ -36,8 +36,7 @@ class ErrorModel extends BaseModel {
   constructor({ errno, message }: Omit<Required<IModel>, 'data'>) {
     super({
       errno,
-      message,
-      data: {}
+      message
     })
   }
 }
