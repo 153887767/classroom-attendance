@@ -30,9 +30,20 @@ const errorInfo: IErrorInfo = {
     errno: 10004,
     message: 'token无效'
   },
+  // 获取教师信息失败
   getUserInfoFailInfo: {
     errno: 10005,
     message: '获取用户信息失败'
+  },
+  // 创建课程失败
+  createLessonFailInfo: {
+    errno: 10006,
+    message: '创建课程失败'
+  },
+  // 删除课程失败
+  deleteLessonFailInfo: {
+    errno: 10007,
+    message: '删除课程失败'
   }
 }
 

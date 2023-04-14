@@ -41,6 +41,15 @@ const deleteLesson = async (id: number) => {
 const getLessonsByTeacherId = async (teacherId: number) => {
   const result = await Lesson.findAndCountAll({
     order: ['id'],
+    attributes: [
+      'id',
+      'lessonName',
+      'teacherId',
+      'dateRange',
+      'day',
+      'time',
+      'location'
+    ],
     where: {
       teacherId
     }
