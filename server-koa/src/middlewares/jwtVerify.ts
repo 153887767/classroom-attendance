@@ -24,15 +24,22 @@ const jwtVerify = (unlessPath: RegExp[]) => {
       ctx.body = new ErrorModel(errorInfo.tokenFailInfo)
       return
     }
+
     // // 校验成功，刷新JWT
     // const newToken = JWT.generate(
     //   {
-    //     _id: payload._id,
+    //     id: payload.id,
     //     userName: payload.userName
     //   },
     //   '1h'
     // )
     // ctx.set('Authorization', newToken)
+
+    // 教师信息挂载到上下文
+    ctx.teacherInfo = {
+      id: payload.id,
+      userName: payload.userName
+    }
     await next()
   }
 }

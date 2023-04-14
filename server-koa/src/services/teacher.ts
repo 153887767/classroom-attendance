@@ -1,5 +1,5 @@
 import { Teacher } from '../db/model'
-import { TeacherInfo } from '../typings/interfaces/teacher'
+import { ITeacherLoginInfo } from '../typings/interfaces/teacher'
 
 /**
  * 查询教师信息(id和userName), 不存在则返回null
@@ -24,7 +24,7 @@ const getTeacherInfo = async (userName: string, password?: string) => {
 /**
  * 创建教师
  */
-const createTeacher = async ({ userName, password }: TeacherInfo) => {
+const createTeacher = async ({ userName, password }: ITeacherLoginInfo) => {
   const result = await Teacher.create({
     userName,
     password

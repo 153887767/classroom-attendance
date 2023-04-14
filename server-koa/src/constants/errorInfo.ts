@@ -1,8 +1,15 @@
 /**
  * 错误信息合集
  */
+type IErrorInfo = Record<
+  string,
+  {
+    errno: number
+    message: string
+  }
+>
 
-const errorInfo = {
+const errorInfo: IErrorInfo = {
   // 用户名已存在
   registerUserNameExistInfo: {
     errno: 10001,
@@ -22,6 +29,10 @@ const errorInfo = {
   tokenFailInfo: {
     errno: 10004,
     message: 'token无效'
+  },
+  getUserInfoFailInfo: {
+    errno: 10005,
+    message: '获取用户信息失败'
   }
 }
 

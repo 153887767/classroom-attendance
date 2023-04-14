@@ -2,14 +2,14 @@ import { Context } from 'koa'
 import { getTeacherInfo, createTeacher } from '../services/teacher'
 import { SuccessModel, ErrorModel } from '../utils/resModel'
 import { errorInfo } from '../constants/errorInfo'
-import { TeacherInfo } from '../typings/interfaces/teacher'
+import { ITeacherLoginInfo, ITeacherInfo } from '../typings/interfaces/teacher'
 import { md5 } from '../utils/md5'
 import { JWT } from '../utils/JWT'
 
 /**
  * 注册教师用户
  */
-const register = async ({ userName, password }: TeacherInfo) => {
+const register = async ({ userName, password }: ITeacherLoginInfo) => {
   const info = await getTeacherInfo(userName)
   if (info !== null) {
     // 用户已存在
@@ -38,7 +38,7 @@ const login = async (ctx: Context, userName: string, password: string) => {
   // JWT
   const token = JWT.generate(
     {
-      _id: info.id,
+      id: info.id,
       userName: info.userName
     },
     '6h'
@@ -50,16 +50,12 @@ const login = async (ctx: Context, userName: string, password: string) => {
 /**
  * 查询教师信息
  */
-const getInfo = async (token?: string) => {
-  const payload = JWT.verify(token || '') as any
 
-  if (payload) {
-    return new SuccessModel({
-      userName: payload.userName,
-      id: payload._id
-    })
+const getInfo = async (teacherInfo?: ITeacherInfo) => {
+  if (teacherInfo) {
+    return new SuccessModel(teacherInfo)
   } else {
-    return new ErrorModel(errorInfo.tokenFailInfo)
+    return new ErrorModel(errorInfo.getUserInfoFailInfo)
   }
 }
 

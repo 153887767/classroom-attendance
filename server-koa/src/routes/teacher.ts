@@ -1,8 +1,9 @@
 /**
  * 教师注册、登录、获取教师信息
  */
+import { Context } from 'koa'
 import Router from 'koa-router'
-import { TeacherInfo } from '../typings/interfaces/teacher'
+import { ITeacherLoginInfo } from '../typings/interfaces/teacher'
 import { register, login, getInfo } from '../controller/teacher'
 
 const router = new Router()
@@ -11,7 +12,7 @@ router.prefix('/api/teacher')
 
 // 注册
 router.post('/register', async (ctx) => {
-  const { userName, password } = ctx.request.body as TeacherInfo
+  const { userName, password } = ctx.request.body as ITeacherLoginInfo
   ctx.body = await register({
     userName,
     password
@@ -20,14 +21,13 @@ router.post('/register', async (ctx) => {
 
 // 登录
 router.post('/login', async (ctx) => {
-  const { userName, password } = ctx.request.body as TeacherInfo
+  const { userName, password } = ctx.request.body as ITeacherLoginInfo
   ctx.body = await login(ctx, userName, password)
 })
 
 // 信息
-router.get('/getInfo', async (ctx) => {
-  const token = ctx.headers.authorization?.split(' ')[1]
-  ctx.body = await getInfo(token)
+router.get('/getInfo', async (ctx: Context) => {
+  ctx.body = await getInfo(ctx.teacherInfo)
 })
 
 export default router

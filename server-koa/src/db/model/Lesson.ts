@@ -22,6 +22,11 @@ const Lesson = sequelize.define('lesson', {
     allowNull: false,
     comment: '星期几'
   },
+  time: {
+    type: STRING,
+    allowNull: false,
+    comment: '时间范围'
+  },
   location: {
     type: STRING,
     allowNull: false,
