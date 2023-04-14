@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Layout from '@/layout'
 import Login from '@/pages/login'
 import ErrorPage from '@/pages/error'
+import Lessons from '@/pages/lessons'
 
 export const router = createBrowserRouter([
   {
@@ -11,9 +12,12 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'a/:id',
-        element: <div>children</div>,
-        errorElement: <div>Oops! There was an error.</div>
+        path: 'lessons/list',
+        element: <Lessons />
+      },
+      {
+        path: 'lessons/form',
+        element: <Lessons />
       }
     ]
   },

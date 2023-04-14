@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Menu } from '@arco-design/web-react'
 import { IconApps, IconBulb } from '@arco-design/web-react/icon'
 
@@ -5,12 +6,15 @@ const MenuItem = Menu.Item
 const SubMenu = Menu.SubMenu
 
 const MainMenu = () => {
+  const navigate = useNavigate()
+
   return (
-    <div className='mt-px shadow w-60 h-[calc(100vh-65px)]'>
+    <div className='mt-px shadow h-[calc(100vh-65px)]'>
       <Menu
+        hasCollapseButton
         defaultOpenKeys={['0', '1']}
         defaultSelectedKeys={['0_0']}
-        className='h-full'
+        style={{ width: 260, height: '100%' }}
       >
         <SubMenu
           key='0'
@@ -20,8 +24,12 @@ const MainMenu = () => {
             </>
           }
         >
-          <MenuItem key='0_0'>课程列表</MenuItem>
-          <MenuItem key='0_1'>课程增删</MenuItem>
+          <MenuItem key='0_0' onClick={() => navigate('/lessons/list')}>
+            课程列表
+          </MenuItem>
+          <MenuItem key='0_1' onClick={() => navigate('/lessons/form')}>
+            课程增删
+          </MenuItem>
         </SubMenu>
         <SubMenu
           key='1'
