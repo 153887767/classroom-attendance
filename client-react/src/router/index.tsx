@@ -1,15 +1,22 @@
-import React from 'react'
+import { lazy, Suspense } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import Layout from '@/layout'
-import Login from '@/pages/login'
-import ErrorPage from '@/pages/error'
-import LessonList from '@/pages/lesson-list'
-import LessonConfig from '@/pages/lesson-config'
+
+import Spin from '@/components/spin'
+
+const Layout = lazy(() => import('@/layout'))
+const Login = lazy(() => import('@/pages/login'))
+const ErrorPage = lazy(() => import('@/pages/error'))
+const LessonList = lazy(() => import('@/pages/lesson-list'))
+const LessonConfig = lazy(() => import('@/pages/lesson-config'))
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: (
+      <Suspense fallback={<Spin />}>
+        <Layout />
+      </Suspense>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
