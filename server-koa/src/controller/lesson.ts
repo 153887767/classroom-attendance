@@ -36,6 +36,10 @@ const delLesson = async (id: number) => {
  */
 const getLessons = async (teacherId: number) => {
   const result = await getLessonsByTeacherId(teacherId)
+  result.lessonList = result.lessonList.map((item) => ({
+    ...item,
+    day: item.day.split(',').map((i: string) => Number(i))
+  }))
   return new SuccessModel(result)
 }
 

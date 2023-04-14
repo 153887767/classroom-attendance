@@ -2511,6 +2511,14 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+arale-qrcode@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/arale-qrcode/-/arale-qrcode-3.0.5.tgz#0bb6870a9155d6284892f6e3c269688f3f5df153"
+  integrity sha512-vxEHaM7e4XbLXeILQ6txelPxHPJHLUZFe8syUflVw3FvohDczY+1MxTzjMsMYy69lVqmAv2qfKKCw59dJlTHoA==
+  dependencies:
+    spm-extend "~1.0.0"
+    spm-jquery "1.7.2"
+
 arg@^4.1.0:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/arg/-/arg-4.1.3.tgz#269fc7ad5b8e42cb63c896d5666017261c144089"
@@ -8264,6 +8272,16 @@ spdy@^4.0.2:
     http-deceiver "^1.2.7"
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
+
+spm-extend@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/spm-extend/-/spm-extend-1.0.0.tgz#ef161164547387b26492a11a4820d9ddf63977c3"
+  integrity sha512-IILSI1IVFXPId0TiR//P0U1oxgYf0840HQ6Z8IBh2fMe7GJvCP2j+AfupWOlrjK66+jc+Byo5FYFyzuhWnQFng==
+
+spm-jquery@1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/spm-jquery/-/spm-jquery-1.7.2.tgz#04d180a4449236f625baecb4fb1f1809ef571ce2"
+  integrity sha512-y5JGXPpEvTjrcWZudteyRm09skYZAq6SpKVskqcUW8B35HXUcRTUJMpwo8AtORmjA3lcG2rVDBTln0om9IGWuw==
 
 sprintf-js@~1.0.2:
   version "1.0.3"

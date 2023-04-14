@@ -4,7 +4,7 @@ const pathToDesc: Record<string, { name: string; menuKey: string }> = {
     menuKey: '0_0'
   },
   '/lesson/form': {
-    name: '课程增删',
+    name: '课程设置',
     menuKey: '0_1'
   }
 }
