@@ -10,7 +10,7 @@ const Layout: React.FC = () => {
 
   useEffect(() => {
     if (location.pathname === '/') {
-      navigate('/lessons/list')
+      navigate('/lesson/list')
     }
   }, [location, navigate])
 
