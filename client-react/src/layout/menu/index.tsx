@@ -33,7 +33,7 @@ const MainMenu: React.FC<IProps> = ({ pathname }) => {
           <MenuItem key='0_0' onClick={() => navigate('/lesson/list')}>
             课程列表
           </MenuItem>
-          <MenuItem key='0_1' onClick={() => navigate('/lesson/form')}>
+          <MenuItem key='0_1' onClick={() => navigate('/lesson/config')}>
             课程设置
           </MenuItem>
         </SubMenu>

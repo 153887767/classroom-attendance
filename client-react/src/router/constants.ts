@@ -3,7 +3,7 @@ const pathToDesc: Record<string, { name: string; menuKey: string }> = {
     name: '课程列表',
     menuKey: '0_0'
   },
-  '/lesson/form': {
+  '/lesson/config': {
     name: '课程设置',
     menuKey: '0_1'
   }

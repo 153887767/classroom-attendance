@@ -4,6 +4,7 @@ import Layout from '@/layout'
 import Login from '@/pages/login'
 import ErrorPage from '@/pages/error'
 import LessonList from '@/pages/lesson-list'
+import LessonConfig from '@/pages/lesson-config'
 
 export const router = createBrowserRouter([
   {
@@ -16,8 +17,8 @@ export const router = createBrowserRouter([
         element: <LessonList />
       },
       {
-        path: 'lesson/form',
-        element: <div>1</div>
+        path: 'lesson/config',
+        element: <LessonConfig />
       }
     ]
   },
