@@ -4,6 +4,7 @@ import { Form, Input, Button, Message } from '@arco-design/web-react'
 import { IconUser, IconLock } from '@arco-design/web-react/icon'
 import { requiredValidator } from '@/utils/requiredValidator'
 import { login, register } from '@/api/teacher'
+import { isError } from '@/utils/errorRes'
 
 const { Item: FormItem } = Form
 const { Password } = Input
@@ -31,7 +32,7 @@ const Login: React.FC = () => {
     if (isLogin) {
       // 登录
       const res = await login(val)
-      if (res && !('errno' in res)) {
+      if (!isError(res)) {
         Message.success('登录成功')
         navigate('/')
       } else {
@@ -40,7 +41,7 @@ const Login: React.FC = () => {
     } else {
       // 注册
       const res = await register(val)
-      if (res && !('errno' in res)) {
+      if (!isError(res)) {
         Message.success('注册成功')
         handleSwitch()
       } else {

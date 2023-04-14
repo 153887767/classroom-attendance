@@ -24,15 +24,15 @@ const jwtVerify = (unlessPath: RegExp[]) => {
       ctx.body = new ErrorModel(errorInfo.tokenFailInfo)
       return
     }
-    // 校验成功，刷新JWT
-    const newToken = JWT.generate(
-      {
-        _id: payload._id,
-        userName: payload.userName
-      },
-      '1h'
-    )
-    ctx.set('Authorization', newToken)
+    // // 校验成功，刷新JWT
+    // const newToken = JWT.generate(
+    //   {
+    //     _id: payload._id,
+    //     userName: payload.userName
+    //   },
+    //   '1h'
+    // )
+    // ctx.set('Authorization', newToken)
     await next()
   }
 }

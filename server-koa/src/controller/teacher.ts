@@ -41,7 +41,7 @@ const login = async (ctx: Context, userName: string, password: string) => {
       _id: info.id,
       userName: info.userName
     },
-    '1h'
+    '6h'
   )
   ctx.set('Authorization', token)
   return new SuccessModel()

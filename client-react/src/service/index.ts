@@ -34,7 +34,7 @@ instance.interceptors.response.use(
   }
 )
 
-interface ErrorInfo {
+export interface ErrorInfo {
   errno: number
   message: string
 }

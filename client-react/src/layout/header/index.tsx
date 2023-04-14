@@ -1,18 +1,29 @@
 import React from 'react'
-import { Avatar, Dropdown, Menu } from '@arco-design/web-react'
+import { useNavigate } from 'react-router-dom'
+import { Avatar, Dropdown, Menu, Message } from '@arco-design/web-react'
 import { IconUser, IconArrowLeft } from '@arco-design/web-react/icon'
 import logo from '@/assets/images/logo.svg'
 
-const dropList = (
-  <Menu>
-    <Menu.Item key='1'>
-      <IconArrowLeft className='mr-2' />
-      <span>退出系统</span>
-    </Menu.Item>
-  </Menu>
-)
-
 const Header: React.FC = () => {
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    // 删除客户端token即可退出
+    // 如果想要让此token彻底失效，可以在服务端添加redis黑名单
+    localStorage.removeItem('token')
+    navigate('/login')
+    Message.success('退出成功')
+  }
+
+  const dropList = (
+    <Menu>
+      <Menu.Item key='1' onClick={handleLogout}>
+        <IconArrowLeft className='mr-2' />
+        <span>退出系统</span>
+      </Menu.Item>
+    </Menu>
+  )
+
   return (
     <div className='w-full h-16 bg-white  px-9 py-4 shadow flex justify-between items-center'>
       <div className='flex cursor-pointer items-center'>
