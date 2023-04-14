@@ -47,4 +47,20 @@ const login = async (ctx: Context, userName: string, password: string) => {
   return new SuccessModel()
 }
 
-export { register, login }
+/**
+ * 查询教师信息
+ */
+const getInfo = async (token?: string) => {
+  const payload = JWT.verify(token || '') as any
+
+  if (payload) {
+    return new SuccessModel({
+      userName: payload.userName,
+      id: payload._id
+    })
+  } else {
+    return new ErrorModel(errorInfo.tokenFailInfo)
+  }
+}
+
+export { register, login, getInfo }

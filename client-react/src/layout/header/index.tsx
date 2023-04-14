@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar, Dropdown, Menu, Message } from '@arco-design/web-react'
 import { IconUser, IconArrowLeft } from '@arco-design/web-react/icon'
+
 import logo from '@/assets/images/logo.svg'
+import { getUserInfo } from '@/api/teacher'
+import { isError } from '@/utils/errorRes'
 
 const Header: React.FC = () => {
   const navigate = useNavigate()
+  const [userName, setUserName] = useState('')
+
+  useEffect(() => {
+    getUserInfo().then((res) => {
+      if (!isError(res)) {
+        setUserName(res.userName)
+      } else {
+        Message.warning(res?.message || '获取用户信息失败')
+      }
+    })
+  }, [])
 
   const handleLogout = () => {
     // 删除客户端token即可退出
@@ -31,7 +45,10 @@ const Header: React.FC = () => {
         <span className='text-xl font-semibold ml-2'>课堂考勤系统</span>
       </div>
       <div className='flex items-center mr-5'>
-        <span className='text-base mr-4'>欢迎回来，张三</span>
+        <span className='text-base mr-4'>
+          <span className='text-sky-400'>{userName}</span>
+          &nbsp;老师，欢迎回来
+        </span>
         <Dropdown
           droplist={dropList}
           position='bottom'

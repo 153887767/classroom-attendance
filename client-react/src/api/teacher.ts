@@ -1,7 +1,7 @@
 /**
- * 教师登录、注册接口
+ * 教师登录、注册、获取信息
  */
-import { post } from '@/service'
+import { post, get } from '@/service'
 import { TeacherInfo } from '@/typings/interfaces/teacher'
 
 export const login = (params: TeacherInfo) => {
@@ -16,4 +16,8 @@ export const register = (params: TeacherInfo) => {
     userName: params.userName,
     password: params.password
   })
+}
+
+export const getUserInfo = () => {
+  return get<{ id: number; userName: string }>('/api/teacher/getInfo')
 }

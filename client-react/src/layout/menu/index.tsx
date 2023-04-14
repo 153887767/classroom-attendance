@@ -21,8 +21,7 @@ const MainMenu = () => {
           }
         >
           <MenuItem key='0_0'>课程列表</MenuItem>
-          <MenuItem key='0_1'>添加课程</MenuItem>
-          <MenuItem key='0_2'>移除课程</MenuItem>
+          <MenuItem key='0_1'>课程增删</MenuItem>
         </SubMenu>
         <SubMenu
           key='1'
@@ -33,7 +32,7 @@ const MainMenu = () => {
           }
         >
           <MenuItem key='1_0'>当前课堂</MenuItem>
-          <MenuItem key='1_1'>考勤小计</MenuItem>
+          <MenuItem key='1_1'>考勤总计</MenuItem>
         </SubMenu>
       </Menu>
     </div>
