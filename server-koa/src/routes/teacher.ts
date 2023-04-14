@@ -1,5 +1,5 @@
 /**
- * 教师注册、登录、退出
+ * 教师注册、登录
  */
 import Router from 'koa-router'
 import { TeacherInfo } from '../typings/interfaces/teacher'
