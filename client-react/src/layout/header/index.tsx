@@ -40,7 +40,12 @@ const Header: React.FC = () => {
 
   return (
     <div className='w-full h-16 bg-white  px-9 py-4 shadow flex justify-between items-center'>
-      <div className='flex cursor-pointer items-center'>
+      <div
+        onClick={() => {
+          navigate('/')
+        }}
+        className='flex cursor-pointer items-center'
+      >
         <img src={logo} alt='' className='w-8 h-8' />
         <span className='text-xl font-semibold ml-2'>课堂考勤系统</span>
       </div>

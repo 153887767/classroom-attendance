@@ -9,7 +9,7 @@ interface IProps {
 
 const Main: React.FC<IProps> = ({ children, pathname }) => {
   return (
-    <Card title={pathToDesc[pathname]} className='w-[950px]'>
+    <Card title={pathToDesc[pathname]?.name} className='w-[950px]'>
       {children}
     </Card>
   )

@@ -1,11 +1,17 @@
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Menu } from '@arco-design/web-react'
 import { IconApps, IconBulb } from '@arco-design/web-react/icon'
+import { pathToDesc } from '@/router/constants'
 
 const MenuItem = Menu.Item
 const SubMenu = Menu.SubMenu
 
-const MainMenu = () => {
+interface IProps {
+  pathname: string
+}
+
+const MainMenu: React.FC<IProps> = ({ pathname }) => {
   const navigate = useNavigate()
 
   return (
@@ -13,7 +19,7 @@ const MainMenu = () => {
       <Menu
         hasCollapseButton
         defaultOpenKeys={['0', '1']}
-        defaultSelectedKeys={['0_0']}
+        selectedKeys={[pathToDesc[pathname]?.menuKey]}
         style={{ width: 260, height: '100%' }}
       >
         <SubMenu

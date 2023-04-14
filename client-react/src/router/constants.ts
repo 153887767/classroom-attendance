@@ -1,6 +1,12 @@
-const pathToDesc: Record<string, string> = {
-  '/lessons/list': '课程列表',
-  '/lessons/form': '课程增删'
+const pathToDesc: Record<string, { name: string; menuKey: string }> = {
+  '/lesson/list': {
+    name: '课程列表',
+    menuKey: '0_0'
+  },
+  '/lesson/form': {
+    name: '课程增删',
+    menuKey: '0_1'
+  }
 }
 
 export { pathToDesc }

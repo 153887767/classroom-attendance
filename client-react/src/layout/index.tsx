@@ -6,21 +6,21 @@ import Main from './main'
 
 const Layout: React.FC = () => {
   const navigate = useNavigate()
-  const location = useLocation()
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    if (location.pathname === '/') {
+    if (pathname === '/') {
       navigate('/lesson/list')
     }
-  }, [location, navigate])
+  }, [pathname, navigate])
 
   return (
     <div className='bg-slate-100'>
       <Header />
       <div className='flex'>
-        <Menu />
+        <Menu pathname={pathname} />
         <div className='flex-1 flex justify-center my-4'>
-          <Main pathname={location.pathname}>
+          <Main pathname={pathname}>
             <Outlet />
           </Main>
         </div>
