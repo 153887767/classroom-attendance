@@ -9,6 +9,7 @@ import index from './routes/index'
 import { jwtVerify } from './middlewares/jwtVerify'
 import teacherRouter from './routes/teacher'
 import lessonRouter from './routes/lesson'
+import locationRouter from './routes/location'
 
 const app = new Koa()
 
@@ -56,6 +57,8 @@ app.use(teacherRouter.routes())
 app.use(teacherRouter.allowedMethods())
 app.use(lessonRouter.routes())
 app.use(lessonRouter.allowedMethods())
+app.use(locationRouter.routes())
+app.use(locationRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
