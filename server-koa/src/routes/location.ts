@@ -1,5 +1,5 @@
 import Router from 'koa-router'
-import { locationPrompt, getDistance } from '../controller/location'
+import { locationPrompt, getDistance, getGeocode } from '../controller/location'
 
 const router = new Router()
 
@@ -16,6 +16,11 @@ router.get('/distance', async (ctx) => {
     ctx.query.origins as string,
     ctx.query.destination as string
   )
+})
+
+// 地理编码，可以获取经纬度
+router.get('/geocode', async (ctx) => {
+  ctx.body = await getGeocode(ctx.query.address as string)
 })
 
 export default router
