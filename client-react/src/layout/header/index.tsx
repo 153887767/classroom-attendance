@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar, Dropdown, Menu, Message } from '@arco-design/web-react'
 import { IconUser, IconArrowLeft } from '@arco-design/web-react/icon'
@@ -6,20 +6,25 @@ import { IconUser, IconArrowLeft } from '@arco-design/web-react/icon'
 import logo from '@/assets/images/logo.svg'
 import { getUserInfo } from '@/api/teacher'
 import { isError } from '@/utils/errorRes'
+import { useStore } from '@/store'
 
 const Header: React.FC = () => {
   const navigate = useNavigate()
-  const [userName, setUserName] = useState('')
+
+  const { userName, setInfo } = useStore((state) => ({
+    userName: state.userName,
+    setInfo: state.setInfo
+  }))
 
   useEffect(() => {
     getUserInfo().then((res) => {
       if (!isError(res)) {
-        setUserName(res.userName)
+        setInfo(res)
       } else {
         Message.warning(res?.message || '获取用户信息失败')
       }
     })
-  }, [])
+  }, [setInfo])
 
   const handleLogout = () => {
     // 删除客户端token即可退出

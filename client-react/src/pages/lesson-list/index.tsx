@@ -12,12 +12,15 @@ import { getLessons } from '@/api/lesson'
 import { isError } from '@/utils/errorRes'
 import Spin from '@/components/spin'
 import { ILessonList, ILessonListItem, Week } from '@/typings/interfaces/lesson'
+import { useStore } from '@/store'
 
 const LessonList: React.FC = () => {
   const [lessons, setLessons] = useState<ILessonList>()
   const [modalVisible, setModalVisible] = useState(false)
 
   const ref = useRef<HTMLDivElement>(null)
+
+  const userName = useStore((state) => state.userName)
 
   useEffect(() => {
     ;(async function () {
@@ -60,6 +63,10 @@ const LessonList: React.FC = () => {
       {
         label: '授课周期',
         value: data.dateRange
+      },
+      {
+        label: '授课教师',
+        value: userName
       },
       {
         label: '课程二维码',
