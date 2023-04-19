@@ -23,8 +23,8 @@ const addLesson = async (lessonInfo: ILesson) => {
 /**
  * 删除课程
  */
-const delLesson = async (id: number) => {
-  const result = await deleteLesson(id)
+const delLesson = async (id: number, teacherId: number) => {
+  const result = await deleteLesson(id, teacherId)
   if (result) {
     return new SuccessModel()
   }

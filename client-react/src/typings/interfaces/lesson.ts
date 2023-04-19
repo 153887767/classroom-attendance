@@ -12,7 +12,6 @@ export type WeekDay = 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 export interface ILesson {
   lessonName: string
-  teacherId: number
   dateRange: string
   day: WeekDay[]
   time: string

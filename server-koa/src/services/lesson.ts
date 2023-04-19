@@ -26,11 +26,15 @@ const createLesson = async ({
 /**
  * 删除课程
  */
-const deleteLesson = async (id: number) => {
+const deleteLesson = async (id: number, teacherId?: number) => {
+  const whereOpt = {
+    id
+  }
+  if (teacherId) {
+    Object.assign(whereOpt, { teacherId })
+  }
   const result = await Lesson.destroy({
-    where: {
-      id
-    }
+    where: whereOpt
   })
   return result > 0
 }
@@ -61,26 +65,3 @@ const getLessonsByTeacherId = async (teacherId: number) => {
 }
 
 export { createLesson, deleteLesson, getLessonsByTeacherId }
-
-// TODO 删除测试
-// createLesson({
-//   lessonName: '并行计算',
-//   teacherId: 2,
-//   dateRange: '2023-04-03~2023-06-23',
-//   day: '1,3',
-//   time: '17:50~18:30',
-//   location: '新校'
-// }).then(console.log)
-
-// createLesson({
-//   lessonName: '并行计算',
-//   teacherId: 2,
-//   dateRange: '2023-04-03~2023-06-23',
-//   day: '1,3',
-//   time: '17:50~18:30',
-//   location: '新校'
-// }).then(console.log)
-
-// deleteLesson(2).then(console.log)
-
-// getLessonsByTeacherId(1).then(console.log)

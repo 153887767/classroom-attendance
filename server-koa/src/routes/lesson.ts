@@ -8,15 +8,20 @@ const router = new Router()
 router.prefix('/api/lesson')
 
 // 添加课程
-router.post('/add', async (ctx) => {
-  const lessonInfo = ctx.request.body as ILesson
+router.post('/add', async (ctx: Context) => {
+  const lessonInfo = Object.assign(
+    ctx.request.body as Omit<ILesson, 'teacherId'>,
+    {
+      teacherId: ctx.teacherInfo.id
+    }
+  )
   ctx.body = await addLesson(lessonInfo)
 })
 
 // 删除课程
-router.post('/delete', async (ctx) => {
+router.post('/delete', async (ctx: Context) => {
   const { id } = ctx.request.body as { id: number }
-  ctx.body = await delLesson(id)
+  ctx.body = await delLesson(id, ctx.teacherInfo.id)
 })
 
 // 获取课程列表
