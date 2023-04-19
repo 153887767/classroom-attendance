@@ -16,6 +16,7 @@ export interface ILesson {
   day: WeekDay[]
   time: string
   location: string
+  geocode: string
 }
 
 export type ILessonListItem = ILesson & { id: number }

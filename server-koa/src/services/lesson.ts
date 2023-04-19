@@ -10,7 +10,8 @@ const createLesson = async ({
   dateRange,
   day,
   time,
-  location
+  location,
+  geocode
 }: ILesson) => {
   const result = await Lesson.create({
     lessonName,
@@ -18,7 +19,8 @@ const createLesson = async ({
     dateRange,
     day,
     time,
-    location
+    location,
+    geocode
   })
   return result.dataValues
 }

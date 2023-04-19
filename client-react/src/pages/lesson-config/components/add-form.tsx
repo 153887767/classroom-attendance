@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Form,
   Input,
@@ -6,10 +6,13 @@ import {
   Checkbox,
   TimePicker,
   DatePicker,
-  Message
+  Message,
+  AutoComplete
 } from '@arco-design/web-react'
+import debounce from 'lodash/debounce'
 
 import { addLesson } from '@/api/lesson'
+import { getPrompt } from '@/api/location'
 import { requiredValidator } from '@/utils/requiredValidator'
 import { isError } from '@/utils/errorRes'
 import { Week } from '@/typings/interfaces/lesson'
@@ -18,17 +21,31 @@ const { Item } = Form
 const { Group } = Checkbox
 const { RangePicker: TimeRangePicker } = TimePicker
 const { RangePicker: DateRangePicker } = DatePicker
+const { Option } = AutoComplete
 
 const AddForm: React.FC = () => {
   const [form] = Form.useForm()
+  const [prompt, setPrompt] = useState<any>([])
+  const [buildingInfo, setBuildingInfo] = useState<{
+    buildingName: string
+    geocode: string
+  }>()
 
   const handleSubmit = async (v: any) => {
+    if (
+      !buildingInfo ||
+      buildingInfo.buildingName !== form.getFieldValue('building')
+    ) {
+      Message.warning('请从下拉框中选择教学楼')
+      return
+    }
     const res = await addLesson({
       lessonName: v.lessonName,
       day: v.day.join(','),
       time: v.time.join('~'),
       dateRange: v.dateRange.join('~'),
-      location: v.location
+      location: buildingInfo.buildingName + v.classroom,
+      geocode: buildingInfo.geocode
     })
     if (!isError(res)) {
       Message.success('添加课程成功')
@@ -36,6 +53,20 @@ const AddForm: React.FC = () => {
       Message.warning(res?.message || '添加课程失败')
     }
     form.resetFields()
+  }
+
+  const handleSearch = async (inputValue: any) => {
+    const res = await getPrompt(inputValue)
+    if (!isError(res)) {
+      setPrompt(res.tips)
+    }
+  }
+
+  const handleClick = (v: any) => {
+    setBuildingInfo({
+      buildingName: v.name,
+      geocode: v.location
+    })
   }
 
   return (
@@ -77,11 +108,32 @@ const AddForm: React.FC = () => {
         <DateRangePicker />
       </Item>
       <Item
-        label='上课地点'
-        field='location'
-        rules={[{ validator: requiredValidator('请输入上课地点') }]}
+        label='教学楼'
+        field='building'
+        rules={[{ validator: requiredValidator('请选择教学楼') }]}
       >
-        <Input placeholder='请输入上课地点' />
+        <AutoComplete
+          placeholder='请输入关键词后下拉选择'
+          onSearch={debounce(handleSearch, 500)}
+          filterOption={false}
+        >
+          {prompt.map((item: any) => (
+            <Option
+              key={item.id}
+              value={item.name}
+              onClick={() => handleClick(item)}
+            >
+              {item.name}
+            </Option>
+          ))}
+        </AutoComplete>
+      </Item>
+      <Item
+        label='教室'
+        field='classroom'
+        rules={[{ validator: requiredValidator('请输入教室号', true) }]}
+      >
+        <Input placeholder='请输入教室号' />
       </Item>
       <Item wrapperCol={{ offset: 5 }}>
         <Button type='primary' htmlType='submit'>

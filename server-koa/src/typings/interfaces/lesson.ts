@@ -5,4 +5,5 @@ export interface ILesson {
   day: string
   time: string
   location: string
+  geocode: string
 }

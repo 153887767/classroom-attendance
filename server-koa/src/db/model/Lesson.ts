@@ -31,6 +31,11 @@ const Lesson = sequelize.define('lesson', {
     type: STRING,
     allowNull: false,
     comment: '上课地点'
+  },
+  geocode: {
+    type: STRING,
+    allowNull: false,
+    comment: '上课地点经纬度'
   }
 })
 
