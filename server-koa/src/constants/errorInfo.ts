@@ -44,6 +44,11 @@ const errorInfo: IErrorInfo = {
   deleteLessonFailInfo: {
     errno: 10007,
     message: '删除课程失败'
+  },
+  // openid获取失败
+  getOpenIdFailInfo: {
+    errno: 10008,
+    message: 'openid获取失败'
   }
 }
 

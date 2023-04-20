@@ -5,11 +5,13 @@ import json from 'koa-json'
 import logger from 'koa-logger'
 import cors from 'koa2-cors'
 
-import index from './routes/index'
 import { jwtVerify } from './middlewares/jwtVerify'
+
+import index from './routes/index'
 import teacherRouter from './routes/teacher'
 import lessonRouter from './routes/lesson'
 import locationRouter from './routes/location'
+import studentRouter from './routes/student'
 
 const app = new Koa()
 
@@ -48,7 +50,13 @@ app.use(async (ctx: Koa.Context, next: Koa.Next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-app.use(jwtVerify([/^\/api\/teacher\/login$/, /^\/api\/teacher\/register$/]))
+app.use(
+  jwtVerify([
+    /^\/api\/teacher\/login$/,
+    /^\/api\/teacher\/register$/,
+    /^\/api\/student\//
+  ])
+)
 
 // routes
 app.use(index.routes())
@@ -59,6 +67,8 @@ app.use(lessonRouter.routes())
 app.use(lessonRouter.allowedMethods())
 app.use(locationRouter.routes())
 app.use(locationRouter.allowedMethods())
+app.use(studentRouter.routes())
+app.use(studentRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
