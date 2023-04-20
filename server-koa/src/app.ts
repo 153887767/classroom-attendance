@@ -54,7 +54,7 @@ app.use(
   jwtVerify([
     /^\/api\/teacher\/login$/,
     /^\/api\/teacher\/register$/,
-    /^\/api\/student\//
+    /^\/api\/student\/login$/
   ])
 )
 

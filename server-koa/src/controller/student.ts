@@ -31,8 +31,8 @@ export const codeToToken = async (code: string) => {
 
   const token = JWT.generate(
     {
-      id: student.id,
-      userName: student.userName
+      studentId: student.id,
+      studentName: student.userName
     },
     '24h'
   )

@@ -35,11 +35,22 @@ const jwtVerify = (unlessPath: RegExp[]) => {
     // )
     // ctx.set('Authorization', newToken)
 
-    // 教师信息挂载到上下文
-    ctx.teacherInfo = {
-      id: payload.id,
-      userName: payload.userName
+    if ('id' in payload) {
+      // 教师信息挂载到上下文
+      ctx.teacherInfo = {
+        id: payload.id,
+        userName: payload.userName
+      }
     }
+
+    if ('studentId' in payload) {
+      // 学生信息挂载到上下文
+      ctx.studentInfo = {
+        studentId: payload.studentId,
+        studentName: payload.studentName
+      }
+    }
+
     await next()
   }
 }
