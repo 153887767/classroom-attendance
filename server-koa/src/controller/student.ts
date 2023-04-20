@@ -34,7 +34,7 @@ export const codeToToken = async (code: string) => {
       id: student.id,
       userName: student.userName
     },
-    '30 days'
+    '24h'
   )
   return new SuccessModel({ token })
 }
