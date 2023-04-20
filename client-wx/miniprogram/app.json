@@ -1,5 +1,9 @@
 {
-  "pages": ["pages/index/index", "pages/logs/logs"],
+  "pages": [
+    "pages/attendance/index",
+    "pages/profile/index",
+    "pages/lessons/index"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -9,5 +13,31 @@
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "van-button": "@vant/weapp/button/index"
+  },
+  "tabBar": {
+    "selectedColor": "#1296db",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/lessons/index",
+        "text": "课程",
+        "iconPath": "images/lessons.png",
+        "selectedIconPath": "images/lessons_light.png"
+      },
+      {
+        "pagePath": "pages/attendance/index",
+        "text": "考勤",
+        "iconPath": "images/attendance.png",
+        "selectedIconPath": "images/attendance_light.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile_light.png"
+      }
+    ]
   }
 }
