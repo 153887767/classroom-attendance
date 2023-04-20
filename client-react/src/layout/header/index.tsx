@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar, Dropdown, Menu, Message } from '@arco-design/web-react'
 import { IconUser, IconArrowLeft } from '@arco-design/web-react/icon'
+import { shallow } from 'zustand/shallow'
 
 import logo from '@/assets/images/logo.svg'
 import { getUserInfo } from '@/api/teacher'
@@ -11,10 +12,13 @@ import { useStore } from '@/store'
 const Header: React.FC = () => {
   const navigate = useNavigate()
 
-  const { userName, setInfo } = useStore((state) => ({
-    userName: state.userName,
-    setInfo: state.setInfo
-  }))
+  const { userName, setInfo } = useStore(
+    (state) => ({
+      userName: state.userName,
+      setInfo: state.setInfo
+    }),
+    shallow
+  )
 
   useEffect(() => {
     getUserInfo().then((res) => {
