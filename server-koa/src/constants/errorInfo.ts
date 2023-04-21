@@ -49,6 +49,11 @@ const errorInfo: IErrorInfo = {
   getOpenIdFailInfo: {
     errno: 10008,
     message: 'openid获取失败'
+  },
+  // 修改用户信息失败
+  changeInfoFailInfo: {
+    errno: 10009,
+    message: '修改用户信息失败'
   }
 }
 

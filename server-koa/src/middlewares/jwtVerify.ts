@@ -46,8 +46,7 @@ const jwtVerify = (unlessPath: RegExp[]) => {
     if ('studentId' in payload) {
       // 学生信息挂载到上下文
       ctx.studentInfo = {
-        studentId: payload.studentId,
-        studentName: payload.studentName
+        studentId: payload.studentId
       }
     }
 
