@@ -78,3 +78,21 @@ export const changeStudentNumber = async (
   }
   return new ErrorModel(errorInfo.changeInfoFailInfo)
 }
+
+/**
+ * 查询学生信息
+ */
+export const getInfo = async (id: number) => {
+  const result = await getStudentById(id)
+  if (result) {
+    return new SuccessModel({
+      userName: result.userName,
+      studentNumber: result.studentNumber ?? '',
+      avatar: result.avatar ?? '',
+      userNameModified: result.userNameModified,
+      studentNumberModified: result.studentNumberModified,
+      faceImg: result.faceImg ?? ''
+    })
+  }
+  return new ErrorModel(errorInfo.getUserInfoFailInfo)
+}

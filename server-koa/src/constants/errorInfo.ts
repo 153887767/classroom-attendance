@@ -30,7 +30,7 @@ const errorInfo: IErrorInfo = {
     errno: 10004,
     message: 'token无效'
   },
-  // 获取教师信息失败
+  // 获取用户信息失败
   getUserInfoFailInfo: {
     errno: 10005,
     message: '获取用户信息失败'

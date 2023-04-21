@@ -3,7 +3,8 @@ import Router from 'koa-router'
 import {
   codeToToken,
   changeUserName,
-  changeStudentNumber
+  changeStudentNumber,
+  getInfo
 } from '../controller/student'
 
 const router = new Router()
@@ -26,6 +27,11 @@ router.post('/username', async (ctx: Context) => {
 router.post('/studentNumber', async (ctx: Context) => {
   const { studentNumber } = ctx.request.body as { studentNumber: string }
   ctx.body = await changeStudentNumber(ctx.studentInfo.studentId, studentNumber)
+})
+
+// 获取学生信息
+router.get('/getInfo', async (ctx: Context) => {
+  ctx.body = await getInfo(ctx.studentInfo.studentId)
 })
 
 export default router

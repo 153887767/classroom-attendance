@@ -50,7 +50,6 @@ const login = async (ctx: Context, userName: string, password: string) => {
 /**
  * 查询教师信息
  */
-
 const getInfo = async (teacherInfo?: ITeacherInfo) => {
   if (teacherInfo) {
     return new SuccessModel(teacherInfo)
