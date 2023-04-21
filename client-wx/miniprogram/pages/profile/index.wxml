@@ -1,2 +1,20 @@
-<!--pages/profile/index.wxml-->
-<text>pages/profile/index.wxml</text>
+<view class="center">
+  <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="handleChooseAvatar">
+    <image class="avatar" src="../../images/profile_light.png"></image>
+  </button>
+</view>
+<view class="cell-wrapper">
+  <van-cell-group>
+    <van-field label="学号" model:value="{{studentNumber}}" disabled="{{studentNumberModified}}" placeholder="请输入学号" clearable use-button-slot>
+      <van-button wx:if="{{!studentNumberModified}}" bind:click="changeStudentNumber" slot="button" size="mini" type="info">
+        保存
+      </van-button>
+    </van-field>
+    <van-field label="姓名" model:value="{{userName}}" disabled="{{userNameModified}}" placeholder="请输入姓名" clearable use-button-slot>
+      <van-button wx:if="{{!userNameModified}}" bind:click="changeUserName" slot="button" size="mini" type="info">
+        保存
+      </van-button>
+    </van-field>
+    <van-cell title="人脸" value="内容" />
+  </van-cell-group>
+</view>

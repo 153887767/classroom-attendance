@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/lessons/index",
     "pages/attendance/index",
-    "pages/profile/index",
-    "pages/lessons/index"
+    "pages/profile/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
