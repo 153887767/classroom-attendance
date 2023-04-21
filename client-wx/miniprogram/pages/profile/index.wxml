@@ -15,6 +15,6 @@
         保存
       </van-button>
     </van-field>
-    <van-cell title="人脸" value="内容" />
+    <van-cell title="人脸" value="点击上传人脸图像" is-link></van-cell>
   </van-cell-group>
 </view>
