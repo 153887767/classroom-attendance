@@ -89,8 +89,8 @@ export const getInfo = async (id: number) => {
       userName: result.userName,
       studentNumber: result.studentNumber ?? '',
       avatar: result.avatar ?? '',
-      userNameModified: result.userNameModified,
-      studentNumberModified: result.studentNumberModified,
+      userNameModified: !!result.userNameModified,
+      studentNumberModified: !!result.studentNumberModified,
       faceImg: result.faceImg ?? ''
     })
   }

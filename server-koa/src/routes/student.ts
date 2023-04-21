@@ -18,9 +18,9 @@ router.post('/login', async (ctx) => {
 })
 
 // 修改姓名
-router.post('/username', async (ctx: Context) => {
-  const { username } = ctx.request.body as { username: string }
-  ctx.body = await changeUserName(ctx.studentInfo.studentId, username)
+router.post('/userName', async (ctx: Context) => {
+  const { userName } = ctx.request.body as { userName: string }
+  ctx.body = await changeUserName(ctx.studentInfo.studentId, userName)
 })
 
 // 修改学号
