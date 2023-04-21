@@ -8,3 +8,7 @@ export const CRYPTO_SECRET_KEY = '8208190403'
 export const JWT_SECRET = 'csu'
 // 高德地图 Key
 export const LOCATION_KEY = 'e1dc8ee378c968c0e28ea6b8e0634501'
+// 阿里云 RAM 用户 AccessKey ID
+export const ALI_ACCESSKEY_ID = 'LTAI5tRQXLmJUkacDuE2enq5'
+// 阿里云 RAM 用户 AccessKey Secret
+export const ALI_ACCESSKEY_SECRET = 'fKJwp7vIQRIff1yQCFYj5IP666Xaji'
