@@ -34,7 +34,6 @@ const registerByOpenid = async (openid: string) => {
 /**
  * 修改姓名、学号、头像、人脸
  */
-
 const updateStudent = async (
   id: number,
   { userName, studentNumber, avatar, faceImg }: Partial<IStudentInfo>
