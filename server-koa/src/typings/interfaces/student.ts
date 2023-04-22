@@ -6,3 +6,5 @@ export interface IStudentInfo {
   userNameModified: boolean
   studentNumberModified: boolean
 }
+
+export type IFolder = 'avatar' | 'faceImg'

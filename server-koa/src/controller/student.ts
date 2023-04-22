@@ -10,6 +10,8 @@ import {
 import { JWT } from '../utils/JWT'
 import { ErrorModel, SuccessModel } from '../utils/resModel'
 import { errorInfo } from '../constants/errorInfo'
+import { IFolder } from '../typings/interfaces/student'
+import { put } from '../utils/oss'
 
 /**
  * 通过 code 换取 openid, 并生成 token
@@ -95,4 +97,27 @@ export const getInfo = async (id: number) => {
     })
   }
   return new ErrorModel(errorInfo.getUserInfoFailInfo)
+}
+
+/**
+ * 上传头像、人脸
+ */
+export const uploadImage = async (
+  id: number,
+  folder: IFolder,
+  filename: string
+) => {
+  const url = await put(`/${folder}/${filename}`)
+  if (url) {
+    const result = await updateStudent(
+      id,
+      folder === 'avatar' ? { avatar: url } : { faceImg: url }
+    )
+    if (result) {
+      return new SuccessModel({
+        url
+      })
+    }
+  }
+  return new ErrorModel(errorInfo.changeInfoFailInfo)
 }

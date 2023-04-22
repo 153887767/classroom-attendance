@@ -1,6 +1,6 @@
 node_modules
 dist
-upload/face/*
-!upload/face/test*.png
+upload/faceImg/*
+!upload/faceImg/test*.png
 upload/avatar/*
 !upload/avatar/test*.png

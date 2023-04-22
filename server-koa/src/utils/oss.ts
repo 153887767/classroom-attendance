@@ -1,6 +1,5 @@
 import OSS from 'ali-oss'
 import path from 'path'
-import { nanoid } from 'nanoid'
 import { ALI_ACCESSKEY_ID, ALI_ACCESSKEY_SECRET } from '../conf/secretKeys'
 
 /**
@@ -17,14 +16,9 @@ const client = new OSS({
  * 上传资源，返回 url
  */
 async function put(filePath: string) {
-  // 文件名添加随机后缀避免重名
-  const uuid = nanoid()
-  const arr = filePath.split('.')
-  arr.splice(1, 0, uuid)
-  const newFilePath = arr.join('.')
   try {
     const result = await client.put(
-      newFilePath,
+      filePath,
       path.join(__dirname, '../../upload', filePath)
     )
     return (result.res as any)?.requestUrls?.[0]

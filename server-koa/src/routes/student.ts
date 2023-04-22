@@ -4,8 +4,10 @@ import {
   codeToToken,
   changeUserName,
   changeStudentNumber,
-  getInfo
+  getInfo,
+  uploadImage
 } from '../controller/student'
+import { avatarUpload, faceUpload } from '../middlewares/multer'
 
 const router = new Router()
 
@@ -33,5 +35,31 @@ router.post('/studentNumber', async (ctx: Context) => {
 router.get('/getInfo', async (ctx: Context) => {
   ctx.body = await getInfo(ctx.studentInfo.studentId)
 })
+
+// 上传头像
+router.post(
+  '/upload/avatar',
+  avatarUpload.single('avatar'), // 接口参数key
+  async (ctx: Context) => {
+    ctx.body = await uploadImage(
+      ctx.studentInfo.studentId,
+      'avatar',
+      ctx.file.filename
+    )
+  }
+)
+
+// 上传人脸图像（人脸注册）
+router.post(
+  '/upload/faceImg',
+  faceUpload.single('faceImg'),
+  async (ctx: Context) => {
+    ctx.body = await uploadImage(
+      ctx.studentInfo.studentId,
+      'faceImg',
+      ctx.file.filename
+    )
+  }
+)
 
 export default router
