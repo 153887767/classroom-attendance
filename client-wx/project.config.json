@@ -23,7 +23,9 @@
         "packageJsonPath": "./package.json",
         "miniprogramNpmDistDir": "./miniprogram/"
       }
-    ]
+    ],
+    "es6": true,
+    "enhance": true
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},

@@ -1,6 +1,6 @@
 <view class="center">
   <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="handleChooseAvatar">
-    <image class="avatar" src="../../images/profile_light.png"></image>
+    <image class="avatar" src="{{avatar || '../../images/profile_light.png'}}"></image>
   </button>
 </view>
 <view class="cell-wrapper">

@@ -1,4 +1,5 @@
 import { request, HttpMethod } from '../../utils/request'
+import { baseUrl } from '../../config/index'
 
 Page({
   data: {
@@ -10,11 +11,31 @@ Page({
     userNameModified: true
   },
 
+  /**
+   * 上传头像
+   */
   handleChooseAvatar(e: WechatMiniprogram.TouchEvent) {
+    const that = this
     const { avatarUrl } = e.detail
-    console.log(avatarUrl)
-    this.setData({
-      avatarUrl
+    wx.uploadFile({
+      url: `${baseUrl}/api/student/upload/avatar`,
+      filePath: avatarUrl,
+      name: 'avatar',
+      header: {
+        Authorization: `Bearer ${wx.getStorageSync('token')}`
+      },
+      success(res) {
+        try {
+          const resData = JSON.parse(res.data)
+          if (!resData.errno) {
+            that.setData({
+              avatar: resData.data.url
+            })
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
     })
   },
 
