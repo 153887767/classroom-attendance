@@ -54,6 +54,11 @@ const errorInfo: IErrorInfo = {
   changeInfoFailInfo: {
     errno: 10009,
     message: '修改用户信息失败'
+  },
+  // 人脸检测不通过
+  faceDetectionFailInfo: {
+    errno: 10010,
+    message: '未通过人脸检测'
   }
 }
 

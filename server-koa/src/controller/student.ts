@@ -1,17 +1,21 @@
+import path from 'path'
 import util from 'util'
 import axios from 'axios'
-import { appId, appSecret, loginUrl } from '../conf/wx'
+
 import {
   getStudentByOpenid,
   registerByOpenid,
   updateStudent,
   getStudentById
 } from '../services/student'
-import { JWT } from '../utils/JWT'
-import { ErrorModel, SuccessModel } from '../utils/resModel'
+import { faceDetection } from './face-detection'
+import { appId, appSecret, loginUrl } from '../conf/wx'
 import { errorInfo } from '../constants/errorInfo'
 import { IFolder } from '../typings/interfaces/student'
+import { JWT } from '../utils/JWT'
+import { ErrorModel, SuccessModel } from '../utils/resModel'
 import { put } from '../utils/oss'
+import { getFileContentAsBase64 } from '../utils/base64'
 
 /**
  * 通过 code 换取 openid, 并生成 token
@@ -107,6 +111,19 @@ export const uploadImage = async (
   folder: IFolder,
   filename: string
 ) => {
+  if (folder === 'faceImg') {
+    // 人脸检测
+    const isOneFace = await faceDetection(
+      getFileContentAsBase64(
+        path.join(__dirname, '../../upload/faceImg', filename)
+      )
+    )
+    if (!isOneFace) {
+      // 未通过人脸检测
+      return new ErrorModel(errorInfo.faceDetectionFailInfo)
+    }
+  }
+  // 上传 OSS
   const url = await put(`/${folder}/${filename}`)
   if (url) {
     const result = await updateStudent(

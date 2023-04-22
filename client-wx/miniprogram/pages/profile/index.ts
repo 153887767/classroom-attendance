@@ -151,6 +151,12 @@ Page({
                   icon: 'success',
                   duration: 1000
                 })
+              } else {
+                wx.showToast({
+                  title: resData.message,
+                  icon: 'error' as any,
+                  duration: 1000
+                })
               }
             } catch (error) {
               console.log(error)

@@ -22,7 +22,7 @@ const getStorage = (folder: string) => {
 
 // 文件上传限制
 const limits = {
-  fileSize: 500 * 1024, // 文件大小，单位 Byte
+  fileSize: 5 * 1024 * 1024, // 文件大小，单位 Byte
   files: 1 // 文件数量
 }
 
