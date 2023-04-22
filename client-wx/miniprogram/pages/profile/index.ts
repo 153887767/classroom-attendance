@@ -1,5 +1,6 @@
 import { request, HttpMethod } from '../../utils/request'
 import { baseUrl } from '../../config/index'
+import { getToken } from '../../utils/token'
 
 Page({
   data: {
@@ -22,7 +23,7 @@ Page({
       filePath: avatarUrl,
       name: 'avatar',
       header: {
-        Authorization: `Bearer ${wx.getStorageSync('token')}`
+        Authorization: getToken()
       },
       success(res) {
         try {
@@ -30,6 +31,11 @@ Page({
           if (!resData.errno) {
             that.setData({
               avatar: resData.data.url
+            })
+            wx.showToast({
+              title: '上传成功',
+              icon: 'success',
+              duration: 1000
             })
           }
         } catch (error) {
@@ -111,6 +117,46 @@ Page({
             })
           }
         }
+      }
+    })
+  },
+
+  /**
+   * 上传人脸图像
+   */
+  changeFaceImg() {
+    const that = this
+    wx.chooseMedia({
+      count: 1,
+      mediaType: ['image'],
+      sourceType: ['album', 'camera'],
+      camera: 'front',
+      success(res) {
+        wx.uploadFile({
+          url: `${baseUrl}/api/student/upload/faceImg`,
+          filePath: res.tempFiles[0].tempFilePath,
+          name: 'faceImg',
+          header: {
+            Authorization: getToken()
+          },
+          success(res) {
+            try {
+              const resData = JSON.parse(res.data)
+              if (!resData.errno) {
+                that.setData({
+                  faceImg: resData.data.url
+                })
+                wx.showToast({
+                  title: '上传成功',
+                  icon: 'success',
+                  duration: 1000
+                })
+              }
+            } catch (error) {
+              console.log(error)
+            }
+          }
+        })
       }
     })
   },

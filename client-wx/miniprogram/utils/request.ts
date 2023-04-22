@@ -1,4 +1,5 @@
 import { baseUrl } from '../config/index'
+import { getToken } from './token'
 
 export enum HttpMethod {
   GET = 'GET',
@@ -14,7 +15,7 @@ export const request = (
 ) => {
   const token = wx.getStorageSync('token')
   if (token) {
-    header['Authorization'] = `Bearer ${token}`
+    header['Authorization'] = getToken()
   }
   wx.showNavigationBarLoading()
   return new Promise((resolve, reject) => {
