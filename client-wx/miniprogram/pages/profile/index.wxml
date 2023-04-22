@@ -5,17 +5,17 @@
 </view>
 <view class="cell-wrapper">
   <van-cell-group inset>
-    <van-field label="学号" model:value="{{studentNumber}}" disabled="{{studentNumberModified}}" placeholder="请输入学号" clearable use-button-slot>
-      <van-button wx:if="{{!studentNumberModified}}" bind:click="changeStudentNumber" slot="button" size="mini" type="info">
+    <van-field label="学号" model:value="{{studentNumber}}" disabled="{{studentNumberModified}}" placeholder="请输入学号" clearable use-button-slot size="large" center>
+      <van-button wx:if="{{!studentNumberModified}}" bind:click="changeStudentNumber" slot="button" size="small" type="info">
         保存
       </van-button>
     </van-field>
-    <van-field label="姓名" model:value="{{userName}}" disabled="{{userNameModified}}" placeholder="请输入姓名" clearable use-button-slot>
-      <van-button wx:if="{{!userNameModified}}" bind:click="changeUserName" slot="button" size="mini" type="info">
+    <van-field label="姓名" model:value="{{userName}}" disabled="{{userNameModified}}" placeholder="请输入姓名" clearable use-button-slot size="large" center>
+      <van-button wx:if="{{!userNameModified}}" bind:click="changeUserName" slot="button" size="small" type="info">
         保存
       </van-button>
     </van-field>
-    <van-cell title="人脸图像" value="点击上传" label="用于人脸识别" bind:tap="changeFaceImg" center>
+    <van-cell title="人脸图像" value="点击上传" label="用于人脸识别" bind:tap="changeFaceImg" center size="large">
       <image slot="right-icon" src="{{faceImg || '../../images/profile_light.png'}}" class="faceimg"></image>
     </van-cell>
   </van-cell-group>
