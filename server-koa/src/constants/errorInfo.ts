@@ -1,15 +1,4 @@
-/**
- * 错误信息合集
- */
-type IErrorInfo = Record<
-  string,
-  {
-    errno: number
-    message: string
-  }
->
-
-const errorInfo: IErrorInfo = {
+const errorInfo = {
   // 用户名已存在
   registerUserNameExistInfo: {
     errno: 10001,
@@ -59,6 +48,11 @@ const errorInfo: IErrorInfo = {
   faceDetectionFailInfo: {
     errno: 10010,
     message: '未通过人脸检测'
+  },
+  // 选课失败
+  selectLessonFailInfo: {
+    errno: 10011,
+    message: '选课失败'
   }
 }
 

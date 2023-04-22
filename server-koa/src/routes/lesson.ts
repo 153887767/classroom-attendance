@@ -1,3 +1,6 @@
+/**
+ * 教师课程管理
+ */
 import { Context } from 'koa'
 import Router from 'koa-router'
 import { addLesson, delLesson, getLessons } from '../controller/lesson'
