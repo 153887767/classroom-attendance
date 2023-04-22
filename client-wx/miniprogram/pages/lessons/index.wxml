@@ -1,2 +1,3 @@
-<!--pages/lessons/index.wxml-->
-<text>pages/lessons/index.wxml</text>
+<van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="点击右侧按钮，扫码加入课堂~">
+  <van-icon bind:click="handleScanCode" slot="right-icon" name="scan" size="60rpx" color="#1989fa" />
+</van-notice-bar>
