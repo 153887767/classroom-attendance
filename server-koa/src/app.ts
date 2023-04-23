@@ -12,6 +12,7 @@ import teacherRouter from './routes/teacher'
 import lessonRouter from './routes/lesson'
 import locationRouter from './routes/location'
 import studentRouter from './routes/student'
+import attendanceRouter from './routes/attendance'
 
 const app = new Koa()
 
@@ -69,6 +70,8 @@ app.use(locationRouter.routes())
 app.use(locationRouter.allowedMethods())
 app.use(studentRouter.routes())
 app.use(studentRouter.allowedMethods())
+app.use(attendanceRouter.routes())
+app.use(attendanceRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
