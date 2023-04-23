@@ -6,13 +6,7 @@ import logger from 'koa-logger'
 import cors from 'koa2-cors'
 
 import { jwtVerify } from './middlewares/jwtVerify'
-
-import index from './routes/index'
-import teacherRouter from './routes/teacher'
-import lessonRouter from './routes/lesson'
-import locationRouter from './routes/location'
-import studentRouter from './routes/student'
-import attendanceRouter from './routes/attendance'
+import index from './routes'
 
 const app = new Koa()
 
@@ -60,18 +54,7 @@ app.use(
 )
 
 // routes
-app.use(index.routes())
-app.use(index.allowedMethods())
-app.use(teacherRouter.routes())
-app.use(teacherRouter.allowedMethods())
-app.use(lessonRouter.routes())
-app.use(lessonRouter.allowedMethods())
-app.use(locationRouter.routes())
-app.use(locationRouter.allowedMethods())
-app.use(studentRouter.routes())
-app.use(studentRouter.allowedMethods())
-app.use(attendanceRouter.routes())
-app.use(attendanceRouter.allowedMethods())
+app.use(index.routes()).use(index.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

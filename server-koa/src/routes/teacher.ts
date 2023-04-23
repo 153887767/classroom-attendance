@@ -8,8 +8,6 @@ import { register, login, getInfo } from '../controller/teacher'
 
 const router = new Router()
 
-router.prefix('/api/teacher')
-
 // 注册
 router.post('/register', async (ctx) => {
   const { userName, password } = ctx.request.body as ITeacherLoginInfo

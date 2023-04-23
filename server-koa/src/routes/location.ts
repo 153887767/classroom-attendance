@@ -3,8 +3,6 @@ import { locationPrompt, getDistance, getGeocode } from '../controller/location'
 
 const router = new Router()
 
-router.prefix('/api/location')
-
 // 地点关键词输入提示
 router.get('/prompt', async (ctx) => {
   ctx.body = await locationPrompt(ctx.query.keyword as string)

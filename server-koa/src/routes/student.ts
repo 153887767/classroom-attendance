@@ -12,8 +12,6 @@ import { avatarUpload, faceUpload } from '../middlewares/multer'
 
 const router = new Router()
 
-router.prefix('/api/student')
-
 // 自动注册&登录
 router.post('/login', async (ctx) => {
   const { code } = ctx.request.body as { code: string }

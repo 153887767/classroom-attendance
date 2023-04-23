@@ -8,8 +8,6 @@ import { ILesson } from '../typings/interfaces/lesson'
 
 const router = new Router()
 
-router.prefix('/api/lesson')
-
 // 添加课程
 router.post('/add', async (ctx: Context) => {
   const lessonInfo = Object.assign(
