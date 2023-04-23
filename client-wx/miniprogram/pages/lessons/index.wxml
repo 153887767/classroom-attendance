@@ -12,6 +12,7 @@
         <view>地点：{{item.location}}</view>
         <view>周期：{{item.dateRange}}</view>
         <view>教师：{{item.teacher}}</view>
+        <view>考勤：{{tools.absenceDays(item.teachingDays, item.attendanceDays)}}</view>
       </view>
     </van-cell>
   </view>

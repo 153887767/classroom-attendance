@@ -22,6 +22,15 @@ var formatDays = function (days) {
     .join('，')
 }
 
+/**
+ * 考勤情况
+ */
+var absenceDays = function (teachingDays, attendanceDays) {
+  var days = teachingDays - attendanceDays
+  return days <= 0 ? '满勤' : '缺勤 ' + days + ' 天'
+}
+
 module.exports = {
-  formatDays: formatDays
+  formatDays: formatDays,
+  absenceDays: absenceDays
 }

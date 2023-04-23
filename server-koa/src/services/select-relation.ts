@@ -60,7 +60,8 @@ const getLessonsByStudentId = async (studentId: number) => {
     count: result.count,
     lessonList: result.rows.map((item) => ({
       ...(item as any).lesson.dataValues,
-      teacher: (item as any).lesson.teacher.dataValues.userName
+      teacher: (item as any).lesson.teacher.dataValues.userName,
+      attendanceDays: item.dataValues.count // 出勤次数
     }))
   }
 }
