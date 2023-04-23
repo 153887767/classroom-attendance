@@ -1,3 +1,18 @@
-<van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="点击右侧按钮，扫码加入课堂~">
+<wxs src="./index.wxs" module="tools" />
+<van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="点击右侧按钮，扫码加入课程~">
   <van-icon bind:click="handleScanCode" slot="right-icon" name="scan" size="60rpx" color="#1989fa" />
 </van-notice-bar>
+<van-empty wx:if="{{!count}}" description="你暂未加入课程" />
+<view wx:else>
+  <view wx:for="{{lessonList}}" wx:key="id" class="card">
+    <van-cell title="{{item.lessonName}}" use-label-slot>
+      <view slot="label">
+        <view>星期：{{tools.formatDays(item.day)}}</view>
+        <view>时间：{{item.time}}</view>
+        <view>地点：{{item.location}}</view>
+        <view>周期：{{item.dateRange}}</view>
+        <view>教师：{{item.teacher}}</view>
+      </view>
+    </van-cell>
+  </view>
+</view>

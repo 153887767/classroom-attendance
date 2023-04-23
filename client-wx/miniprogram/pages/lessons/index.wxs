@@ -1,0 +1,27 @@
+// '1' 不能写成 1, 否则报错
+var daysMap = {
+  '1': '星期一',
+  '2': '星期二',
+  '3': '星期三',
+  '4': '星期四',
+  '5': '星期五',
+  '6': '星期六',
+  '7': '星期日'
+}
+
+/**
+ * 星期字符串格式化。
+ * '2,4' => '星期二，星期四'
+ */
+var formatDays = function (days) {
+  return days
+    .split(',')
+    .map(function (item) {
+      return daysMap[item]
+    })
+    .join('，')
+}
+
+module.exports = {
+  formatDays: formatDays
+}
