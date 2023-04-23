@@ -24,6 +24,11 @@ Page({
         if (result.data?.errno === 0) {
           const { count, lessonList } = result.data.data
           that.setData({ count, lessonList })
+          wx.showToast({
+            title: '加入课程成功',
+            icon: 'success',
+            duration: 1000
+          })
         }
       }
     })
