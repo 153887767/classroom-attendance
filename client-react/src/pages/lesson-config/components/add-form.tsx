@@ -79,9 +79,9 @@ const AddForm: React.FC = () => {
         <Input placeholder='请输入课程名称' />
       </Item>
       <Item
-        label='上课时间'
+        label='上课星期'
         field='day'
-        rules={[{ validator: requiredValidator('请选择上课时间') }]}
+        rules={[{ validator: requiredValidator('请选择上课星期') }]}
       >
         <Group>
           <Checkbox value={Week['星期一']}>{Week[1]}</Checkbox>
@@ -94,9 +94,9 @@ const AddForm: React.FC = () => {
         </Group>
       </Item>
       <Item
-        label='具体时间'
+        label='上课时间'
         field='time'
-        rules={[{ validator: requiredValidator('请选择具体时间') }]}
+        rules={[{ validator: requiredValidator('请选择上课时间') }]}
       >
         <TimeRangePicker format='HH:mm' />
       </Item>
