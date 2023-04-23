@@ -15,13 +15,11 @@ export const selectLesson = async (studentId: number, lessonId: number) => {
   const isSelected = await isLessonSelected(studentId, lessonId)
   if (isSelected) {
     // 选过，无需再选
-    const lessonsList = await getLessonsByStudentId(studentId)
-    return new SuccessModel(lessonsList)
+    return await getLessons(studentId)
   }
   try {
     await createSelectRelation(studentId, lessonId)
-    const lessonsList = await getLessonsByStudentId(studentId)
-    return new SuccessModel(lessonsList)
+    return await getLessons(studentId)
   } catch (error) {
     return new ErrorModel(errorInfo.selectLessonFailInfo)
   }
