@@ -7,6 +7,7 @@ import {
   getInfo,
   uploadImage
 } from '../controller/student'
+import { selectLesson, getLessons } from '../controller/select-relation'
 import { avatarUpload, faceUpload } from '../middlewares/multer'
 
 const router = new Router()
@@ -61,5 +62,20 @@ router.post(
     )
   }
 )
+
+/**
+ * 学生选课
+ */
+router.post('/selectLesson', async (ctx: Context) => {
+  const { lessonId } = ctx.request.body as { lessonId: number }
+  ctx.body = await selectLesson(ctx.studentInfo.studentId, lessonId)
+})
+
+/**
+ * 学生选课列表
+ */
+router.get('/lessonsList', async (ctx: Context) => {
+  ctx.body = await getLessons(ctx.studentInfo.studentId)
+})
 
 export default router
