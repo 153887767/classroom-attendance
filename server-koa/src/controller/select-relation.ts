@@ -7,17 +7,19 @@ import { errorInfo } from '../constants/errorInfo'
 import { SuccessModel, ErrorModel } from '../utils/resModel'
 
 /**
- * 学生选课
+ * 学生选课，并返回选课列表
  */
 export const selectLesson = async (studentId: number, lessonId: number) => {
   const isSelected = await isLessonSelected(studentId, lessonId)
   if (isSelected) {
     // 选过，无需再选
-    return new SuccessModel()
+    const lessonsList = await getLessonsByStudentId(studentId)
+    return new SuccessModel(lessonsList)
   }
   try {
     await createSelectRelation(studentId, lessonId)
-    return new SuccessModel()
+    const lessonsList = await getLessonsByStudentId(studentId)
+    return new SuccessModel(lessonsList)
   } catch (error) {
     return new ErrorModel(errorInfo.selectLessonFailInfo)
   }
