@@ -8,7 +8,6 @@ import {
   updateStudent,
   getStudentById
 } from '../services/student'
-import { faceDetection } from './face-detection'
 import { appId, appSecret, loginUrl } from '../conf/wx'
 import { errorInfo } from '../constants/errorInfo'
 import { IFolder } from '../typings/interfaces/student'
@@ -16,6 +15,7 @@ import { JWT } from '../utils/JWT'
 import { ErrorModel, SuccessModel } from '../utils/resModel'
 import { put } from '../utils/oss'
 import { getFileContentAsBase64 } from '../utils/base64'
+import { faceDetection } from '../utils/face'
 
 /**
  * 通过 code 换取 openid, 并生成 token
