@@ -7,7 +7,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "课堂考勤",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
