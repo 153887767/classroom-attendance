@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "van-empty": "@vant/weapp/empty/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
+  }
 }

@@ -1,2 +1,25 @@
-<!--pages/attendance/index.wxml-->
-<text>pages/attendance/index.wxml</text>
+<view wx:if="{{!currentLesson}}">
+  <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="现在没有上课噢~" />
+  <van-empty description="当前无需考勤" />
+</view>
+<view wx:else>
+  <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="你有一门课程需要考勤~" />
+  <van-cell title="课程信息" use-label-slot class="cell">
+    <view slot="label">
+      <view>名称：{{currentLesson.lessonName}}</view>
+      <view>时间：今天 {{currentLesson.time}}</view>
+      <view>地点：{{currentLesson.location}}</view>
+      <view>教师：{{currentLesson.teacher}}</view>
+    </view>
+  </van-cell>
+  <van-cell title="考勤定位" use-label-slot class="cell">
+    <view slot="label">
+      <van-button type="info" plain>获取定位</van-button>
+    </view>
+  </van-cell>
+  <van-cell title="人脸识别" use-label-slot class="cell">
+    <view slot="label">
+      <van-button type="info" plain>人脸识别</van-button>
+    </view>
+  </van-cell>
+</view>
