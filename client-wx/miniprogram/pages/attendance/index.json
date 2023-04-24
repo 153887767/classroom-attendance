@@ -2,6 +2,7 @@
   "usingComponents": {
     "van-empty": "@vant/weapp/empty/index",
     "van-cell": "@vant/weapp/cell/index",
-    "van-notice-bar": "@vant/weapp/notice-bar/index"
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-icon": "@vant/weapp/icon/index"
   }
 }

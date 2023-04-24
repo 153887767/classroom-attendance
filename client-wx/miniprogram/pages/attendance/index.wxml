@@ -12,14 +12,21 @@
       <view>教师：{{currentLesson.teacher}}</view>
     </view>
   </van-cell>
-  <van-cell title="考勤定位" use-label-slot class="cell">
+  <van-cell title="考勤定位" use-label-slot class="cell" value="{{isLocationCorrect ? '已到达' : '未到达'}}" center>
     <view slot="label">
-      <van-button type="info" plain>获取定位</van-button>
+      <view>到达教室后，获取定位</view>
+      <van-button type="info" plain icon="location-o" bind:click="getLocation" class="btn">
+        获取定位
+      </van-button>
     </view>
+    <van-icon slot="right-icon" name="{{isLocationCorrect ? 'success' : 'cross'}}" class="{{isLocationCorrect ? 'success' : 'cross'}}" />
   </van-cell>
-  <van-cell title="人脸识别" use-label-slot class="cell">
+  <van-cell title="考勤识别" use-label-slot class="cell">
     <view slot="label">
-      <van-button type="info" plain>人脸识别</van-button>
+      <view>到达教室并获取定位后，进行人脸识别考勤</view>
+      <van-button disabled="{{!isLocationCorrect}}" type="info" plain icon="smile-o" class="btn">
+        人脸识别
+      </van-button>
     </view>
   </van-cell>
 </view>
