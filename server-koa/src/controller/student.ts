@@ -1,6 +1,7 @@
 import path from 'path'
 import util from 'util'
 import axios from 'axios'
+import fse from 'fs-extra'
 
 import {
   getStudentByOpenid,
@@ -111,13 +112,10 @@ export const uploadImage = async (
   folder: IFolder,
   filename: string
 ) => {
+  const filePath = path.join(__dirname, `../../upload/${folder}`, filename)
   if (folder === 'faceImg') {
     // 人脸检测
-    const isOneFace = await faceDetection(
-      getFileContentAsBase64(
-        path.join(__dirname, '../../upload/faceImg', filename)
-      )
-    )
+    const isOneFace = await faceDetection(getFileContentAsBase64(filePath))
     if (!isOneFace) {
       // 未通过人脸检测
       return new ErrorModel(errorInfo.faceDetectionFailInfo)
@@ -125,6 +123,8 @@ export const uploadImage = async (
   }
   // 上传 OSS
   const url = await put(`/${folder}/${filename}`)
+  // 从本地 upload 文件夹中删除该图片
+  await fse.remove(filePath)
   if (url) {
     const result = await updateStudent(
       id,
