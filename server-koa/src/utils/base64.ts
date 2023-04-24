@@ -1,3 +1,4 @@
+import axios from 'axios'
 import fs from 'fs'
 
 /**
@@ -11,4 +12,12 @@ export function getFileContentAsBase64(path: string) {
   } catch (err: any) {
     throw new Error(err)
   }
+}
+
+/**
+ * 图片url转base64
+ */
+export async function getImageBase64FromUrl(url: string): Promise<string> {
+  const res = await axios.get(url, { responseType: 'arraybuffer' })
+  return Buffer.from(res.data, 'binary').toString('base64')
 }

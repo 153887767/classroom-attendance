@@ -10,6 +10,7 @@ export const sequelize = new Sequelize(
   MYSQL_CONF.password,
   {
     host: MYSQL_CONF.host,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    timezone: '+08:00' // 时区设置
   }
 )

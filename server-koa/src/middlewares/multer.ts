@@ -29,7 +29,13 @@ const limits = {
 // 头像上传
 const avatarUpload = multer({ storage: getStorage('avatar'), limits })
 
-// 人脸图片上传
+// 人脸注册图片上传
 const faceUpload = multer({ storage: getStorage('faceImg'), limits })
 
-export { avatarUpload, faceUpload }
+// 人脸识别图片上传
+const faceRecognitionUpload = multer({
+  storage: getStorage('faceRecognition'),
+  limits
+})
+
+export { avatarUpload, faceUpload, faceRecognitionUpload }

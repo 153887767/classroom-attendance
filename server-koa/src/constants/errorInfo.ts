@@ -53,6 +53,21 @@ const errorInfo = {
   selectLessonFailInfo: {
     errno: 10011,
     message: '选课失败'
+  },
+  // 人脸匹配失败
+  faceRecognitionFailInfo: {
+    errno: 10012,
+    message: '人脸不匹配'
+  },
+  // 没有上传过人脸图像
+  getfaceImgFailInfo: {
+    errno: 10013,
+    message: '没有上传过人脸图像'
+  },
+  // 考勤失败
+  attendanceFailInfo: {
+    errno: 10014,
+    message: '考勤失败'
   }
 }
 

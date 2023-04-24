@@ -1,5 +1,5 @@
 import { sequelize } from '../sequelize'
-import { INTEGER } from '../types'
+import { INTEGER, DATE } from '../types'
 
 const SelectRelation = sequelize.define('selectRelation', {
   lessonId: {
@@ -16,6 +16,11 @@ const SelectRelation = sequelize.define('selectRelation', {
     type: INTEGER,
     allowNull: false,
     comment: '考勤次数'
+  },
+  lastAttendance: {
+    type: DATE,
+    allowNull: true,
+    comment: '最后一次考勤时间'
   }
 })
 

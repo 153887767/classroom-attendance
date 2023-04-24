@@ -6,7 +6,8 @@
     "start": "cross-env NODE_ENV=dev tsc && node bin/www",
     "dev": "cross-env NODE_ENV=dev nodemon --watch src/**/* --ext ts --exec npm start",
     "build:linux": "cross-env NODE_ENV=dev rm -rf dist && tsc",
-    "build:windows": "cross-env NODE_ENV=dev rimraf dist && tsc"
+    "build:windows": "cross-env NODE_ENV=dev rimraf dist && tsc",
+    "db:sync": "ts-node ./src/db/sync.ts"
   },
   "dependencies": {
     "@koa/multer": "^3.0.2",

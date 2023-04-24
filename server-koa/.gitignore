@@ -4,3 +4,5 @@ upload/faceImg/*
 !upload/faceImg/test*.png
 upload/avatar/*
 !upload/avatar/test*.png
+upload/faceRecognition/*
+!upload/faceRecognition/test*.png

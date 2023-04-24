@@ -1,10 +1,17 @@
 /**
  * 学生考勤
  */
+import path from 'path'
 import dayjs from 'dayjs'
 import isBetween from 'dayjs/plugin/isBetween'
-import { getLessonsByStudentId } from '../services/select-relation'
-import { SuccessModel } from '../utils/resModel'
+import fse from 'fs-extra'
+
+import { errorInfo } from '../constants/errorInfo'
+import { getLessonsByStudentId, addCount } from '../services/select-relation'
+import { getStudentById } from '../services/student'
+import { SuccessModel, ErrorModel } from '../utils/resModel'
+import { getImageBase64FromUrl, getFileContentAsBase64 } from '../utils/base64'
+import { faceRecognition } from '../utils/face'
 
 dayjs.extend(isBetween)
 
@@ -17,9 +24,7 @@ const getCurrentLesson = async (studentId: number) => {
   if (day === 0) {
     day = 7
   }
-
   const dayFormat = dayjs().format('YYYY-MM-DD')
-
   for (let i = 0; i < lessonList.length; i++) {
     const [startDate, endDate] = lessonList[i].dateRange.split('~')
     const [startTime, endTime] = lessonList[i].time.split('~')
@@ -45,4 +50,46 @@ const getCurrentLesson = async (studentId: number) => {
   return new SuccessModel()
 }
 
-export { getCurrentLesson }
+/**
+ * 学生人脸识别考勤，对比人脸相似度
+ */
+const attendance = async (
+  studentId: number,
+  lessonId: number,
+  uploadFilename: string
+) => {
+  const filePath = path.join(
+    __dirname,
+    '../../upload/faceRecognition',
+    uploadFilename
+  )
+  const uploadFileBase64 = getFileContentAsBase64(filePath)
+  // 获取图片base64后，删除上传到upload/faceRecognition的人脸图片
+  await fse.remove(filePath)
+
+  const studentInfo = await getStudentById(studentId)
+  if (studentInfo === null) {
+    return new ErrorModel(errorInfo.getUserInfoFailInfo)
+  }
+  if (!studentInfo.faceImg) {
+    // 没有上传过人脸图像
+    return new ErrorModel(errorInfo.getfaceImgFailInfo)
+  }
+  const faceImgBase64 = await getImageBase64FromUrl(studentInfo.faceImg)
+
+  // 人脸对比
+  const isSameFace = await faceRecognition(faceImgBase64, uploadFileBase64)
+  if (!isSameFace) {
+    // 不是同一个人脸
+    return new ErrorModel(errorInfo.faceRecognitionFailInfo)
+  }
+
+  // 考勤次数+1
+  const result = await addCount(studentId, lessonId)
+  if (!result) {
+    return new ErrorModel(errorInfo.attendanceFailInfo)
+  }
+  return new SuccessModel()
+}
+
+export { getCurrentLesson, attendance }

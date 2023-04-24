@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { SelectRelation, Lesson, Teacher } from '../db/model'
 
 /**
@@ -66,4 +67,45 @@ const getLessonsByStudentId = async (studentId: number) => {
   }
 }
 
-export { createSelectRelation, isLessonSelected, getLessonsByStudentId }
+/**
+ * 学生考勤签到
+ */
+const addCount = async (studentId: number, lessonId: number) => {
+  const relationInfo = await SelectRelation.findOne({
+    where: {
+      studentId,
+      lessonId
+    }
+  })
+  if (!relationInfo) {
+    return false
+  }
+
+  const lastAttendance = relationInfo.dataValues.lastAttendance
+  if (dayjs().isSame(dayjs(lastAttendance), 'day')) {
+    // 今天考勤过了，不能再次考勤
+    return false
+  }
+
+  const count = relationInfo.dataValues.count
+  const result = await SelectRelation.update(
+    {
+      count: count + 1,
+      lastAttendance: new Date()
+    },
+    {
+      where: {
+        studentId,
+        lessonId
+      }
+    }
+  )
+  return result[0] > 0
+}
+
+export {
+  createSelectRelation,
+  isLessonSelected,
+  getLessonsByStudentId,
+  addCount
+}
