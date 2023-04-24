@@ -1,9 +1,13 @@
+import dayjs from 'dayjs'
 import { request, HttpMethod } from '../../utils/request'
+import { baseUrl } from '../../config/index'
+import { getToken } from '../../utils/token'
 
 Page({
   data: {
     currentLesson: null,
-    isLocationCorrect: false
+    isLocationCorrect: false,
+    isAttendance: false
   },
 
   /**
@@ -29,10 +33,66 @@ Page({
           // TODO 模拟器环境暂时使用2万米来判定
           if (result.data.results[0].distance < 20000) {
             that.setData({ isLocationCorrect: true })
+            wx.showToast({
+              title: '已到达教室',
+              icon: 'success',
+              duration: 1000
+            })
           } else {
             that.setData({ isLocationCorrect: false })
+            wx.showToast({
+              title: '未到达教室',
+              icon: 'error' as any,
+              duration: 1000
+            })
           }
         }
+      }
+    })
+  },
+
+  /**
+   * 人脸识别
+   */
+  faceRecognition() {
+    const that = this
+    const lessonId = (that.data.currentLesson as any)?.id ?? 0
+    wx.chooseMedia({
+      count: 1,
+      mediaType: ['image'],
+      sourceType: ['camera'],
+      camera: 'front',
+      success(res) {
+        wx.uploadFile({
+          url: `${baseUrl}/api/attendance/faceRecognition`,
+          filePath: res.tempFiles[0].tempFilePath,
+          name: 'faceImg',
+          header: {
+            Authorization: getToken()
+          },
+          formData: { lessonId },
+          success(res) {
+            try {
+              const resData = JSON.parse(res.data)
+              if (!resData.errno) {
+                that.setData({ isAttendance: true })
+                wx.showToast({
+                  title: '考勤成功',
+                  icon: 'success',
+                  duration: 1000
+                })
+              } else {
+                wx.showToast({
+                  title: resData.message,
+                  icon: 'error' as any,
+                  duration: 1000
+                })
+              }
+            } catch (error) {
+              console.log(error)
+            }
+          }
+        })
       }
     })
   },
@@ -46,10 +106,12 @@ Page({
       HttpMethod.GET
     )
     if (res.data?.errno === 0 && res.data.data.currentLesson) {
-      this.setData({
-        currentLesson: res.data.data.currentLesson
-      })
-      console.log(this.data.currentLesson)
+      const currentLesson = res.data.data.currentLesson
+      this.setData({ currentLesson })
+      if (dayjs().isSame(dayjs(currentLesson.lastAttendance), 'day')) {
+        // 今日已考勤
+        this.setData({ isLocationCorrect: true, isAttendance: true })
+      }
     }
   }
 })
