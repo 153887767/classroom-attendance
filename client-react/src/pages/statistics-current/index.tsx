@@ -121,6 +121,10 @@ const StatisticsCuttent: React.FC = () => {
       value: currentLesson.location
     },
     {
+      label: '学生总数',
+      value: attendanceInfo?.list?.length
+    },
+    {
       label: '课程二维码',
       value: (
         <Button type='outline' onClick={() => showQRcode(currentLesson.id)}>
