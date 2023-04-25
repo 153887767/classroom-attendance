@@ -6,7 +6,9 @@ import isBetween from 'dayjs/plugin/isBetween'
 
 import { getLessonsByTeacherId } from '../services/lesson'
 import { getStudentsByLessonId } from '../services/select-relation'
+import { getLessonInfo } from '../services/lesson'
 import { SuccessModel } from '../utils/resModel'
+import { getClassDays } from '../utils/day'
 
 dayjs.extend(isBetween)
 
@@ -46,6 +48,19 @@ export const getCurrentLesson = async (teacherId: number) => {
  * 通过课程id查找选课的学生及其考勤情况
  */
 export const getAttendanceInfo = async (lessonId: number) => {
-  const result = await getStudentsByLessonId(lessonId)
-  return new SuccessModel(result)
+  const studentInfo = await getStudentsByLessonId(lessonId)
+  const lessonInfo = await getLessonInfo(lessonId)
+  let totalDays = 0
+  let teachingDays = 0
+  if (lessonInfo) {
+    const [start, end] = lessonInfo.dateRange.split('~')
+    const days = lessonInfo.day.split(',')
+    totalDays = getClassDays(start, end, days)
+    teachingDays = getClassDays(start, dayjs().format('YYYY-MM-DD'), days)
+  }
+  return new SuccessModel({
+    ...studentInfo,
+    totalDays, // 总共需要上课的次数
+    teachingDays: teachingDays <= totalDays ? teachingDays : totalDays // 已经授课的次数
+  })
 }

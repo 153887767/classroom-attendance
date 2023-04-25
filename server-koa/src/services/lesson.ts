@@ -66,4 +66,16 @@ const getLessonsByTeacherId = async (teacherId: number) => {
   }
 }
 
-export { createLesson, deleteLesson, getLessonsByTeacherId }
+/**
+ * 根据课程id获取课程信息
+ */
+const getLessonInfo = async (id: number) => {
+  const result = await Lesson.findOne({
+    where: {
+      id
+    }
+  })
+  return result?.dataValues
+}
+
+export { createLesson, deleteLesson, getLessonsByTeacherId, getLessonInfo }

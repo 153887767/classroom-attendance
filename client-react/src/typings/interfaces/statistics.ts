@@ -20,4 +20,6 @@ interface IStudentInfo {
 export interface IAttendanceInfo {
   count: number
   list: Array<IStudentInfo>
+  totalDays: number
+  teachingDays: number
 }
