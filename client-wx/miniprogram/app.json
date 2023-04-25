@@ -45,5 +45,6 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于考勤定位"
     }
-  }
+  },
+  "lazyCodeLoading": "requiredComponents"
 }
