@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+
+import Spin from '@/components/spin'
 import Header from './header'
 import Menu from './menu'
 import Main from './main'
@@ -21,7 +23,9 @@ const Layout: React.FC = () => {
         <Menu pathname={pathname} />
         <div className='flex-1 flex justify-center my-4'>
           <Main pathname={pathname}>
-            <Outlet />
+            <Suspense fallback={<Spin />}>
+              <Outlet />
+            </Suspense>
           </Main>
         </div>
       </div>

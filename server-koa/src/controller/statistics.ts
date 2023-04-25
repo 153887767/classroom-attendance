@@ -39,7 +39,7 @@ export const getCurrentLesson = async (teacherId: number) => {
     )
   })
   // 如果当前没有课程，则currentLesson为undefined
-  return new SuccessModel({ currentLesson })
+  return new SuccessModel({ ...currentLesson })
 }
 
 /**

@@ -45,8 +45,12 @@ const MainMenu: React.FC<IProps> = ({ pathname }) => {
             </>
           }
         >
-          <MenuItem key='1_0'>当前课堂</MenuItem>
-          <MenuItem key='1_1'>考勤总计</MenuItem>
+          <MenuItem key='1_0' onClick={() => navigate('/statistics/current')}>
+            当前课程
+          </MenuItem>
+          <MenuItem key='1_1' onClick={() => navigate('/statistics/all')}>
+            考勤统计
+          </MenuItem>
         </SubMenu>
       </Menu>
     </div>
