@@ -98,9 +98,9 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 每次进入此页面都重新拉取数据
    */
-  async onLoad() {
+  async onShow() {
     const res: any = await request(
       '/api/attendance/currentLesson',
       HttpMethod.GET
