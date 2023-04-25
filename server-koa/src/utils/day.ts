@@ -1,7 +1,4 @@
 import dayjs from 'dayjs'
-import weekOfYear from 'dayjs/plugin/weekOfYear'
-
-dayjs.extend(weekOfYear)
 
 /**
  * 计算上课天数。
@@ -19,7 +16,9 @@ const getClassDays = (start: string, end: string, days: number[]) => {
     }
     return 0
   }
-  let count = (date2.week() - date1.week() - 1) * days.length
+  let count =
+    (date2.startOf('week').diff(date1.startOf('week'), 'week') - 1) *
+    days.length
   days.forEach((item) => {
     if (item === 7) {
       item = 0
