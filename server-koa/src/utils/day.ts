@@ -8,7 +8,7 @@ const getClassDays = (start: string, end: string, days: number[]) => {
   const date1 = dayjs(start)
   const date2 = dayjs(end)
   if (date1.isAfter(date2)) {
-    return -1
+    return 0
   }
   if (date1.isSame(date2)) {
     if (days.includes(date1.day()) || (date1.day() === 0 && days.includes(7))) {
