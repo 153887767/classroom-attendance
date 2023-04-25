@@ -7,8 +7,10 @@ import {
   Image,
   InputNumber,
   Card,
-  Descriptions
+  Descriptions,
+  Tooltip
 } from '@arco-design/web-react'
+import { IconQuestionCircle } from '@arco-design/web-react/icon'
 
 import { getAttendanceInfo } from '@/api/statistics'
 import { isError } from '@/utils/errorRes'
@@ -59,7 +61,14 @@ const StatisticsAll: React.FC = () => {
       value: attendanceInfo?.lessonName
     },
     {
-      label: '已授课次数',
+      label: (
+        <>
+          <span>已授课次数</span>
+          <Tooltip content='包含今日课程'>
+            <IconQuestionCircle className='cursor-pointer ml-1' />
+          </Tooltip>
+        </>
+      ),
       value: attendanceInfo?.teachingDays
     },
     {
