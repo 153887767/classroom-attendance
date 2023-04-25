@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { SelectRelation, Lesson, Teacher } from '../db/model'
+import { SelectRelation, Lesson, Teacher, Student } from '../db/model'
 
 /**
  * 学生id绑定课程id
@@ -104,9 +104,38 @@ const addCount = async (studentId: number, lessonId: number) => {
   return result[0] > 0
 }
 
+/**
+ * 通过课程id查找选课的学生及其考勤情况
+ */
+const getStudentsByLessonId = async (lessonId: number) => {
+  const result = await SelectRelation.findAndCountAll({
+    attributes: ['count', 'lastAttendance'],
+    include: [
+      {
+        model: Student,
+        attributes: ['id', 'userName', 'studentNumber', 'faceImg']
+      }
+    ],
+    where: {
+      lessonId
+    }
+  })
+  return {
+    count: result.count,
+    list: result.rows.map((item) => {
+      return {
+        ...(item as any).student.dataValues,
+        count: item.dataValues.count,
+        lastAttendance: item.dataValues.lastAttendance
+      }
+    })
+  }
+}
+
 export {
   createSelectRelation,
   isLessonSelected,
   getLessonsByStudentId,
-  addCount
+  addCount,
+  getStudentsByLessonId
 }

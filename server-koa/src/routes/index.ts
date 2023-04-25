@@ -4,6 +4,7 @@ import lessonRouter from './lesson'
 import locationRouter from './location'
 import studentRouter from './student'
 import attendanceRouter from './attendance'
+import statisticsRouter from './statistics'
 
 const router = new Router()
 
@@ -21,6 +22,11 @@ router.use(
   '/attendance',
   attendanceRouter.routes(),
   attendanceRouter.allowedMethods()
+)
+router.use(
+  '/statistics',
+  statisticsRouter.routes(),
+  statisticsRouter.allowedMethods()
 )
 
 export default router
