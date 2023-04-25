@@ -22,4 +22,5 @@ export interface IAttendanceInfo {
   list: Array<IStudentInfo>
   totalDays: number
   teachingDays: number
+  lessonName: string
 }

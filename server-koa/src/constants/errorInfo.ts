@@ -68,6 +68,11 @@ const errorInfo = {
   attendanceFailInfo: {
     errno: 10014,
     message: '考勤失败'
+  },
+  // 不能查询其他教师的课程考勤情况
+  getOthersLessonFailInfo: {
+    errno: 10015,
+    message: '只能查询自己的课程'
   }
 }
 

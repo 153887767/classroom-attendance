@@ -14,7 +14,10 @@ router.get('/currentLesson', async (ctx: Context) => {
 
 // 获取课堂考勤情况
 router.get('/attendance', async (ctx: Context) => {
-  ctx.body = await getAttendanceInfo(Number(ctx.query.lessonId))
+  ctx.body = await getAttendanceInfo(
+    ctx.teacherInfo.id,
+    Number(ctx.query.lessonId)
+  )
 })
 
 export default router
