@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosError } from 'axios'
 
 const instance = axios.create({
   baseURL: 'http://127.0.0.1:3001', // 本地
-  // baseURL: 'http://qingkong.xyz:3001', // 线上
+  // baseURL: 'https://attendance.qingkong.xyz:3001', // 线上
   timeout: 10000 // 请求超时设置
 })
 
