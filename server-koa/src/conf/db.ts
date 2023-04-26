@@ -1,4 +1,4 @@
-import { isProd } from '../utils/env'
+import { notDev } from '../utils/env'
 
 let MYSQL_CONF = {
   host: 'localhost',
@@ -8,12 +8,12 @@ let MYSQL_CONF = {
   database: 'face'
 }
 
-if (isProd) {
+if (notDev) {
   MYSQL_CONF = {
     // 线上的 mysql 配置
-    host: 'localhost',
-    user: 'root',
-    password: 'admin',
+    host: 'http://120.77.34.222',
+    user: 'face',
+    password: 'F372eKNcK8wYpiEi',
     port: '3306',
     database: 'face'
   }
