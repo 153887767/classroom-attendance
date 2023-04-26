@@ -11,7 +11,7 @@ let MYSQL_CONF = {
 if (notDev) {
   MYSQL_CONF = {
     // 线上的 mysql 配置
-    host: 'http://120.77.34.222',
+    host: '120.77.34.222',
     user: 'face',
     password: 'F372eKNcK8wYpiEi',
     port: '3306',

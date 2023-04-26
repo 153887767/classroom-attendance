@@ -16,6 +16,18 @@ onerror(app)
 app.use(
   cors({
     origin: function (ctx) {
+      // 允许跨域的白名单
+      const whiteList = ['http://attendance.qingkong.xyz']
+      if (ctx.header.referer) {
+        // 去掉 referer 结尾的 /
+        const url = ctx.header.referer.substring(
+          0,
+          ctx.header.referer.length - 1
+        )
+        if (whiteList.includes(url)) {
+          return url
+        }
+      }
       return 'http://localhost:3000'
     },
     // maxAge指定本次预请求的有效期，单位为秒 (Access-Control-Max-Age)
