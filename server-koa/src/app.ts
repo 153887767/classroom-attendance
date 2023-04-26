@@ -17,7 +17,10 @@ app.use(
   cors({
     origin: function (ctx) {
       // 允许跨域的白名单
-      const whiteList = ['http://attendance.qingkong.xyz']
+      const whiteList = [
+        'http://attendance.qingkong.xyz',
+        'https://attendance.qingkong.xyz'
+      ]
       if (ctx.header.referer) {
         // 去掉 referer 结尾的 /
         const url = ctx.header.referer.substring(
