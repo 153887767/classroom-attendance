@@ -4,13 +4,20 @@ import bodyparser from 'koa-bodyparser'
 import json from 'koa-json'
 import logger from 'koa-logger'
 import cors from 'koa2-cors'
+import sslify from 'koa-sslify'
 
 import { jwtVerify } from './middlewares/jwtVerify'
 import index from './routes'
+import { notDev } from './utils/env'
 
 const app = new Koa()
 
 onerror(app)
+
+if (notDev) {
+  // 线上环境使用 HTTPS
+  app.use(sslify())
+}
 
 // middlewares
 app.use(

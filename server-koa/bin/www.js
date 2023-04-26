@@ -9,6 +9,22 @@ var debug = require('debug')('demo:server')
 var http = require('http')
 
 /**
+ * 配置 HTTPS
+ */
+const https = require('https')
+const fs = require('fs')
+const path = require('path')
+
+const options = {
+  key: fs.readFileSync(
+    path.join(__dirname, '../ssl/attendance.qingkong.xyz.key')
+  ),
+  cert: fs.readFileSync(
+    path.join(__dirname, '../ssl/attendance.qingkong.xyz.pem')
+  )
+}
+
+/**
  * Get port from environment and store in Express.
  */
 
@@ -19,7 +35,15 @@ var port = normalizePort(process.env.PORT || '3001')
  * Create HTTP server.
  */
 
-var server = http.createServer(app.callback())
+// var server = http.createServer(app.callback())
+let server
+if (process.env.NODE_ENV !== 'dev') {
+  // 线上环境创建 HTTPS 服务
+  server = https.createServer(options, app.callback())
+} else {
+  // 开发环境创建 HTTP 服务
+  server = http.createServer(app.callback())
+}
 
 /**
  * Listen on provided port, on all network interfaces.
