@@ -7,7 +7,7 @@
     "dev": "cross-env NODE_ENV=dev nodemon --watch src/**/* --ext ts --exec npm run start:dev",
     "build:linux": "cross-env NODE_ENV=dev rm -rf dist && tsc",
     "build:windows": "cross-env NODE_ENV=dev rimraf dist && tsc",
-    "db:sync": "ts-node ./src/db/sync.ts",
+    "db:sync": "cross-env NODE_ENV=dev ts-node ./src/db/sync.ts",
     "start": "node bin/www"
   },
   "dependencies": {
