@@ -30,8 +30,8 @@ Page({
           }
         )
         if (result.statusCode === 200 && result.data.status === '1') {
-          // TODO 模拟器环境暂时使用2万米来判定
-          if (result.data.results[0].distance < 20000) {
+          if (result.data.results[0].distance < 500) {
+          // 500米内，可考勤
             that.setData({ isLocationCorrect: true })
             wx.showToast({
               title: '已到达教室',
