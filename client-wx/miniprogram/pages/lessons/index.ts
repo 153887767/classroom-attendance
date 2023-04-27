@@ -35,14 +35,31 @@ Page({
   },
 
   /**
+   * 请求列表数据
+   */
+  getLessonsList() {
+    return request('/api/student/lessonsList', HttpMethod.GET).then(
+      (res: any) => {
+        if (res.data?.errno === 0) {
+          const { count, lessonList } = res.data.data
+          this.setData({ count, lessonList })
+        }
+      }
+    )
+  },
+
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    request('/api/student/lessonsList', HttpMethod.GET).then((res: any) => {
-      if (res.data?.errno === 0) {
-        const { count, lessonList } = res.data.data
-        this.setData({ count, lessonList })
-      }
-    })
+    this.getLessonsList()
+  },
+
+  /**
+   * 下拉刷新
+   */
+  async onPullDownRefresh() {
+    await this.getLessonsList()
+    wx.stopPullDownRefresh()
   }
 })
