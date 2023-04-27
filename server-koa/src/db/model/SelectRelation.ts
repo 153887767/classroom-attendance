@@ -1,7 +1,8 @@
 import { sequelize } from '../sequelize'
 import { INTEGER, DATE } from '../types'
 
-const SelectRelation = sequelize.define('selectRelation', {
+// 'selectRelation' 线上环境报错，需要改成 'selectrelation'
+const SelectRelation = sequelize.define('selectrelation', {
   lessonId: {
     type: INTEGER,
     allowNull: false,
