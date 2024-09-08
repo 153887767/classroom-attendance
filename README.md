@@ -3,9 +3,9 @@
 ## 技术栈
 
 - 教师端（前端）：TypeScript + React18
-- 教师端（后端）：TypeScript + Koa2
+- 教师端（后端）：TypeScript + Koa2 + MySQL
 - 学生端（前端）：TypeScript + 微信小程序
-- 学生端（后端）：TypeScript + Koa2
+- 学生端（后端）：TypeScript + Koa2 + MySQL
 
 ## 三方服务
 
