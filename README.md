@@ -2,9 +2,10 @@
 
 ## 技术栈
 
-- 服务端：Koa2
-- 教师端：React18
-- 学生端：微信小程序
+- 教师端（前端）：TypeScript + React18
+- 教师端（后端）：TypeScript + Koa2
+- 学生端（前端）：TypeScript + 微信小程序
+- 学生端（后端）：TypeScript + Koa2
 
 ## 三方服务
 
