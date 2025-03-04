@@ -16,3 +16,13 @@
 ## 项目部署
 
 [项目部署记录](https://bn17vgx2ja.feishu.cn/docx/LuJ1d7Kvgo9unFxFenecbneynVd)
+
+## 部分功能截图
+
+<img src="README.assets/4.jpg" style="zoom:33%;" />
+
+<img src="README.assets/5.jpg" style="zoom:33%;" />
+
+<img src="README.assets/2.png" style="zoom:50%;" />
+
+<img src="README.assets/3.png" style="zoom:50%;" />
